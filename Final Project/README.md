@@ -148,3 +148,71 @@ model.compile(
 )
 ```
 Dikarenakan membagi 3 class maka loss function yang digunakan adalah `categorical_crossentropy`
+
+## 11. Implement Callback
+Menggunakan `EarlyStopping` callback dari TensorFlow untuk menghentikan pelatihan lebih awal jika performa pada data validasi tidak membaik setelah beberapa epoch, mencegah overfitting.
+```python
+callback = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=3)
+```
+
+## 12. Train the Model
+Melatih model dengan data pelatihan dan validasi, menggunakan callback untuk menghentikan pelatihan jika diperlukan.
+```python
+history = model.fit(
+    train_data,
+    steps_per_epoch=train_data.samples // 32,
+    validation_data=val_data,
+    validation_steps=val_data.samples // 32,
+    epochs=25,
+    callbacks=[callback]
+)
+```
+
+## 13. Visualize Accuracy and Loss
+Membuat plot untuk melihat perubahan akurasi dan loss pada data pelatihan dan validasi selama pelatihan.
+```python
+acc = history.history['accuracy']
+val_acc = history.history['val_accuracy']
+loss = history.history['loss']
+val_loss = history.history['val_loss']
+
+epochs_range = range(len(acc))
+
+plt.figure(figsize=(8, 8))
+plt.subplot(1, 2, 1)
+plt.plot(epochs_range, acc, label='Training Accuracy')
+plt.plot(epochs_range, val_acc, label='Validation Accuracy')
+plt.legend(loc='lower right')
+plt.title('Training and Validation Accuracy')
+
+plt.subplot(1, 2, 2)
+plt.plot(epochs_range, loss, label='Training Loss')
+plt.plot(epochs_range, val_loss, label='Validation Loss')
+plt.legend(loc='upper right')
+plt.title('Training and Validation Loss')
+plt.show()
+```
+
+## 14. Evaluate the Model
+Evaluasi model pada data validasi untuk mengukur performa akhir model.
+```python
+results = model.evaluate(val_data)
+print(f"Validation Loss: {results[0]}")
+print(f"Validation Accuracy: {results[1]}")
+```
+
+## 15. Predict Image
+Menggunakan model untuk memprediksi gambar baru dan menentukan kelasnya.
+```python
+img = image.load_img('path_to_image', target_size=(150, 150))
+img_array = image.img_to_array(img)
+img_array = np.expand_dims(img_array, axis=0)
+img_array /= 255.
+
+prediction = model.predict(img_array)
+class_names = ['paper', 'rock', 'scissors']
+print(f"Predicted class: {class_names[np.argmax(prediction)]}")
+```
+
+## 16. Results
+Model yang telah dilatih mampu mengenali bentuk tangan dengan akurasi yang baik. Evaluasi model menunjukkan hasil yang baik pada data validasi, dan contoh prediksi menunjukkan kemampuan model untuk mengklasifikasikan gambar baru dengan benar.
