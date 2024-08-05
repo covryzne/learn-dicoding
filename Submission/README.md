@@ -4,6 +4,14 @@ This project aims to analyze the sentiment of Grab app user reviews.
 ## Table of Contents
 1. [Introduction](#1-introduction)
 2. [Objective](#2-objective)
+3. [Method](#3-method)
+    * [Collecting Data](#31-collecting-data)
+    * [Data Preparation](#32-data-preparation)
+    * [Text Processing](#33-text-processing)
+    * [Labeling](#34-labeling)
+    * [Training Model](#35-training-model)
+4. [Predict](#4-predict)
+5. [Conclusion](#5-conclusion)
 
 ## 1. Introduction
 As technology develops and the use of transportation service applications such as Grab increases, 
@@ -115,17 +123,13 @@ def filteringText(tokens):
 ## Stemming Text
 ```python
 def stemmingText(text):
-    # Membuat objek stemmer
     factory = StemmerFactory()
     stemmer = factory.create_stemmer()
 
-    # Memecah teks menjadi daftar kata
     words = text.split()
 
-    # Menerapkan stemming pada setiap kata dalam daftar
     stemmed_words = [stemmer.stem(word) for word in words]
 
-    # Menggabungkan kata-kata yang telah distem
     return ' '.join(stemmed_words)
 ```
 
