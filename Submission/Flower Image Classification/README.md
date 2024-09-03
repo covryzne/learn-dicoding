@@ -40,6 +40,18 @@ This project is focused on building a Convolutional Neural Network (CNN) model t
 - **Pooling Layers:** MaxPooling layers are employed to reduce the spatial dimensions of the feature maps, which helps in reducing the computation and controlling overfitting.
 - **Dropout Layer:** A dropout layer is added to prevent overfitting by randomly setting a fraction of input units to 0 at each update during training.
 - **Dense Layer:** The final dense layer with a softmax activation function outputs the probabilities of each class.
+  
+Model: **Sequential**
+| Layer (type)                 | Output Shape   | Param #   |
+|------------------------------|----------------|-----------|
+| MobilenetV3large (Functional) | (None, 7, 7, 960) | 2,996,352 |
+| conv2d (Conv2D)              | (None, 7, 7, 64)  | 553,024   |
+| max_pooling2d (MaxPooling2D) | (None, 3, 3, 64)  | 0         |
+| conv2d_1 (Conv2D)            | (None, 3, 3, 128) | 73,856    |
+| max_pooling2d_1 (MaxPooling2D)| (None, 1, 1, 128) | 0         |
+| flatten (Flatten)            | (None, 128)      | 0         |
+| dropout (Dropout)            | (None, 128)      | 0         |
+| dense (Dense)                | (None, 14)       | 1,806     |
 
 ### Activation Functions:
 
@@ -72,6 +84,26 @@ This project is focused on building a Convolutional Neural Network (CNN) model t
 
 - During the training process, plots for accuracy and loss over epochs are generated to visualize the model's learning process.
 - These plots help in understanding how well the model is fitting the data and whether there are any signs of overfitting or underfitting.
+
+<img src="https://github.com/shendyeff/learn-dicoding/blob/c5763b49534610b28748a60f3c24519ad7c383cf/Submission/Assets/Flower%20Image%20Classification/loss%20acc.png" width="1000">
+
+| Epoch | Loss    | Accuracy | Val Loss | Val Accuracy |
+|-------|---------|----------|----------|--------------|
+| 0     | 0.905522| 0.736210 | 0.277265 | 0.918622     |
+| 1     | 0.327626| 0.903977 | 0.165723 | 0.945748     |
+| 2     | 0.206954| 0.938061 | 0.128094 | 0.961877     |
+| 3     | 0.146846| 0.954279 | 0.105651 | 0.969941     |
+| 4     | 0.109960| 0.968298 | 0.158723 | 0.958578     |
+| 5     | 0.110463| 0.966648 | 0.123099 | 0.976173     |
+| 6     | 0.099199| 0.972329 | 0.125565 | 0.974707     |
+| 7     | 0.101633| 0.971413 | 0.092807 | 0.979106     |
+| 8     | 0.052077| 0.984790 | 0.109990 | 0.979472     |
+| 9     | 0.086612| 0.977369 | 0.128743 | 0.974340     |
+| 10    | 0.070326| 0.979751 | 0.113604 | 0.982405     |
+| 11    | 0.047733| 0.987539 | 0.127281 | 0.981305     |
+| 12    | 0.057384| 0.985890 | 0.150161 | 0.976173     |
+
+<img src="https://github.com/shendyeff/learn-dicoding/blob/c5763b49534610b28748a60f3c24519ad7c383cf/Submission/Assets/Flower%20Image%20Classification/accuracy%20epoch.png">
 
 ## Model Deployment
 
