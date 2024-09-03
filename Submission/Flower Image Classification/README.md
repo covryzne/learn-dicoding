@@ -9,20 +9,17 @@ This project is focused on building a Convolutional Neural Network (CNN) model t
 ### Dataset Description:
 
 - The dataset contains 14 different categories of flowers:
-  - Astilbe
-  - Bellflower
-  - Black-Eyed Susan
-  - Calendula
-  - California Poppy
-  - Carnation
-  - Common Daisy
-  - Coreopsis
-  - Dandelion
-  - Iris
-  - Rose
-  - Sunflower
-  - Tulip
-  - Water Lily
+
+| Categories Flowers     | Categories Flowers     |
+|------------------------|------------------------|
+| Astilbe                | Bellflower             |
+| Black-Eyed Susan       | Calendula              |
+| California Poppy       | Carnation              |
+| Common Daisy           | Coreopsis              |
+| Dandelion              | Iris                   |
+| Rose                   | Sunflower              |
+| Tulip                  | Water Lily             |
+
 - The total number of images in the dataset exceeds 13,000, ensuring the dataset meets the required minimum of 10000 images.
 - The images are divided into a training set (80%) and a validation/test set (20%) to evaluate the model's performance effectively.
 
