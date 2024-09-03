@@ -124,21 +124,43 @@ Model: **Sequential**
 
 ```python
 import tensorflow as tf
-from tensorflow.keras.preprocessing import image
-from tensorflow.keras.applications.mobilenet_v3 import preprocess_input
 import numpy as np
+from tensorflow.keras.preprocessing import image
 
-# Load the trained model
-model = tf.keras.models.load_model('model.h5')
+# Load the TFLite model and allocate tensors.
+interpreter = tf.lite.Interpreter(model_path="/content/tflite/model.tflite")
+interpreter.allocate_tensors()
 
-# Load and preprocess the image
-img_path = 'path_to_your_image.jpg'
+# Get input and output tensors.
+input_details = interpreter.get_input_details()
+output_details = interpreter.get_output_details()
+
+# Prepare the image
+img_path = '6105173_d0b6a55d9e_c.jpg'
 img = image.load_img(img_path, target_size=(224, 224))
 img_array = image.img_to_array(img)
 img_array = np.expand_dims(img_array, axis=0)
-img_array = preprocess_input(img_array)
+img_array = img_array.astype('float32')
 
-# Perform inference
-predictions = model.predict(img_array)
-predicted_class = np.argmax(predictions, axis=1)
+# Set the tensor to the image
+interpreter.set_tensor(input_details[0]['index'], img_array)
+
+# Run inference
+interpreter.invoke()
+
+# Get the output
+output_data = interpreter.get_tensor(output_details[0]['index'])
+predicted_class = np.argmax(output_data, axis=1)
+
+print(f'Predicted class: {class_names[predicted_class[0]]}')
+
+# Display the image and the prediction
+plt.imshow(img)
+plt.title(f'Predicted: {class_names[predicted_class[0]]}')
+plt.axis('off')
+plt.show()
 ```
+### Prediction
+<img src="https://github.com/shendyeff/learn-dicoding/blob/85f2947b2f1fff9393f58b07d681ea57d3e6db3b/Submission/Assets/Flower%20Image%20Classification/pred-rose.png" width="400">
+
+
