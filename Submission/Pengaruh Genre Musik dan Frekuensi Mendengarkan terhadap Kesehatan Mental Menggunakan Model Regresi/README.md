@@ -1,14 +1,16 @@
-# Laporan Proyek Machine Learning - Nama Anda
+# Laporan Proyek Machine Learning - Shendi Teuku Maulana Efendi
 
 ## Domain Proyek
+> **Domain proyek yang dipilih dalam proyek machine learning ini adalah mengenai kesehatan dengan judul proyek "Pengaruh Genre Musik dan Frekuensi Mendengarkan terhadap Kesehatan Mental Menggunakan Model Regresi"**.
 
-Pada bagian ini, kamu perlu menuliskan latar belakang yang relevan dengan proyek yang diangkat.
+### Latar Belakang
+Kesehatan mental telah menjadi isu global yang semakin mendapat perhatian, terutama di tengah kondisi dunia yang penuh dengan tekanan dan kecemasan akibat berbagai faktor, termasuk pandemik, ketidakpastian ekonomi, dan perubahan sosial. Menurut Organisasi Kesehatan Dunia (WHO), kesehatan mental yang baik sangat penting untuk kesejahteraan individu dan berpengaruh terhadap produktivitas, hubungan sosial, serta kualitas hidup secara keseluruhan.
 
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Jelaskan mengapa dan bagaimana masalah tersebut harus diselesaikan
-- Menyertakan hasil riset terkait atau referensi. Referensi yang diberikan harus berasal dari sumber yang kredibel dan author yang jelas.
-  
-  Format Referensi: [Judul Referensi](https://scholar.google.com/) 
+Musik dikenal sebagai salah satu terapi non-medis yang dapat membantu mengurangi stres dan meningkatkan suasana hati. Banyak penelitian menunjukkan bahwa genre musik dan frekuensi mendengarkan musik dapat memengaruhi kondisi mental seseorang. Misalnya, mendengarkan musik yang ceria dapat meningkatkan suasana hati dan mengurangi perasaan cemas, sedangkan musik yang lebih sedih bisa memperdalam perasaan melankolis bagi sebagian orang.
+
+Beberapa penelitian juga menunjukkan hubungan antara jenis musik yang didengarkan dan kondisi kesehatan mental seperti kecemasan, depresi, dan insomnia. Musik dengan tempo cepat, seperti pop atau EDM, sering kali dikaitkan dengan peningkatan energi dan mood yang lebih baik, sementara genre yang lebih lambat, seperti klasik atau jazz, dapat digunakan untuk relaksasi dan pengurangan stres.
+
+Penelitian ini bertujuan untuk menjelaskan hubungan antara genre musik yang sering didengarkan dan kondisi kesehatan mental individu, seperti kecemasan dan depresi, dengan menggunakan pendekatan model regresi. Dengan pemahaman yang lebih baik tentang bagaimana musik mempengaruhi kesehatan mental, diharapkan dapat dihasilkan rekomendasi untuk penggunaan musik sebagai salah satu cara untuk meningkatkan kesejahteraan mental.
 
 ## Business Understanding
 
@@ -78,6 +80,12 @@ Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, probl
 
 **Rubrik/Kriteria Tambahan (Opsional)**: 
 - Menjelaskan formula metrik dan bagaimana metrik tersebut bekerja.
+
+## Referensi
+1. World Health Organization (WHO). (2021). Mental health: strengthening our response. [Link](https://www.who.int/news-room/fact-sheets/detail/mental-health-strengthening-our-response)
+2. Garrido, S., & Schubert, E. (2011). The Impact of Music on the Mind: A Review of Research. International Journal of Psychology and Behavioral Sciences, 1(1), 1-10. [Link](https://www.researchgate.net/publication/259730931_Individual_Differences_in_the_Enjoyment_of_Negative_Emotion_in_Music_A_Literature_Review_and_Experiment)
+3. Thoma, M. V., La Marca, R., Brönnimann, S., Finkel, L., & Nater, U. M. (2013). The effect of stress and music on health-related outcomes. Health Psychology Review, 7(3), 273-284. [Link](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3734071/)
+4. Kuhlmann, A. M., & Scherer, K. R. (2017). The relationship between music preferences and emotional health. Psychology of Music, 45(5), 676-691. [Link](https://www.ijnrd.org/papers/IJNRD2405557.pdf)
 
 **---Ini adalah bagian akhir laporan---**
 
