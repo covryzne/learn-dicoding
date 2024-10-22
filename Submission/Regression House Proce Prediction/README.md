@@ -232,48 +232,220 @@ mask[np.triu_indices_from(mask)] = True
 sns.heatmap(train_num.corr(), cmap=sns.diverging_palette(20, 220, n=200), mask = mask, annot=True, center = 0)
 ```
 <img src="https://github.com/shendyeff/learn-dicoding/blob/7576517887dc3062ce8e3bed5ae7b5f80c4c31d3/Submission/Regression%20House%20Proce%20Prediction/Assets/heatmapcorr.png" width="">
-1. Terdapat korelasi sebesar 0,83 atau 83% antara `GarageYrBlt` dan `YearBuilt`. <br>
-2. Korelasi 83% antara `TotRmsAbvGrd` dan `GrLivArea`. <br>
-3. Korelasi 89% antara `GarageCars` dan `GarageArea`. <br>
+
+1. Terdapat korelasi sebesar 0,83 atau 83% antara `GarageYrBlt` dan `YearBuilt`.<br>
+2. Korelasi 83% antara `TotRmsAbvGrd` dan `GrLivArea`.<br>
+3. Korelasi 89% antara `GarageCars` dan `GarageArea`.<br>
 4. Demikian pula banyak fitur lain seperti `BsmtUnfSF`, `FullBath` memiliki korelasi yang baik dengan fitur independen lainnya.
 
 
 
 ## Data Preparation
-Pada bagian ini Anda menerapkan dan menyebutkan teknik data preparation yang dilakukan. Teknik yang digunakan pada notebook dan laporan harus berurutan.
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan proses data preparation yang dilakukan
-- Menjelaskan alasan mengapa diperlukan tahapan data preparation tersebut.
+### Handling Outliers
+Outliers dapat mengganggu performa model prediksi, oleh karena itu, perlu dihilangkan dari data.
+```python
+# Menghapus outliers pada GrLivArea
+train = train[train.GrLivArea < 4500]
+train.reset_index(drop = True, inplace = True)
+```
+
+### Merging Train dan Test Data
+Menggabungkan data `train` dan `test` untuk menangani missing values dan melakukan transformasi fitur pada seluruh dataset.
+```python
+y = train['SalePrice']
+train_df = train.drop('SalePrice', axis=1)
+test_df = test
+df_all = pd.concat([train_df, test_df]).reset_index(drop=True)
+```
+
+### Creating New Features
+Menambahkan beberapa fitur baru seperti umur rumah berdasarkan `YrSold` dan `YearBuilt`.
+```python
+df_all['age'] = df_all['YrSold'] - df_all['YearBuilt']
+```
+Beberapa kolom numerik yang sebenarnya adalah kategori seperti MSSubClass juga diubah menjadi tipe string.
+```python
+df_all[['MSSubClass']] = df_all[['MSSubClass']].astype(str)
+df_all['YrSold'] = df_all['YrSold'].astype(str)
+df_all['MoSold'] = df_all['MoSold'].astype(str)
+```
+
+### Handling Missing Values
+Menangani nilai yang hilang berdasarkan tipe datanya.
+
+1. Mengisi nilai berdasarkan mode untuk kolom kategori.
+2. Mengisi nilai dengan angka default seperti 0 untuk kolom numerik.
+
+```python
+# Mengisi missing values berdasarkan kategori
+df_all['Functional'] = df_all['Functional'].fillna('Typ')
+df_all['Electrical'] = df_all['Electrical'].fillna('SBrkr')
+df_all['PoolQC'] = df_all['PoolQC'].fillna('None')
+df_all['GarageYrBlt'] = df_all['GarageYrBlt'].fillna(0)
+df_all['KitchenQual'] = df_all['KitchenQual'].fillna("TA")
+```
+
+### Handling Skewness
+Variabel numerik yang memiliki skewness dihilangkan dengan menggunakan transformasi `Yeo-Johnson` untuk membuat distribusinya lebih normal.
+```python
+from sklearn.preprocessing import PowerTransformer
+transformer = PowerTransformer(method='yeo-johnson')
+df_all[skew_index] = transformer.fit_transform(df_all[skew_index])
+```
+
+### Feature Engineering
+Membuat fitur-fitur baru yang berguna untuk memperbaiki prediksi seperti `Total_sqr_footage`, `Total_Bathrooms`, dan `Total_porch_sf`.
+```python
+# Menambahkan total luas bangunan dan area basement
+df_all['Total_sqr_footage'] = (df_all['BsmtFinSF1'] + df_all['BsmtFinSF2'] +
+                                 df_all['1stFlrSF'] + df_all['2ndFlrSF'])
+```
+
+Fitur biner juga ditambahkan untuk memberikan informasi "ada" atau "tidak" secara eksplisit pada fitur seperti has_pool, has_2ndfloor, dll.
+```python
+df_all['has_pool'] = df_all['PoolArea'].apply(lambda x: 1 if x > 0 else 0)
+```
+### Log Transformation
+Log transformation diterapkan untuk menangani skewness lebih lanjut pada beberapa fitur numerik.
+```python
+def log_transform(result, features):
+    for feature in features:
+        result[feature + '_log'] = np.log(1.01 + result[feature])
+    return result
+
+log_features = ['LotFrontage', 'LotArea', 'GrLivArea', ...]
+df_all = log_transform(df_all, log_features)
+```
+### One-Hot Encoding
+Fitur-fitur kategorikal diubah menjadi format numerik dengan menggunakan teknik one-hot encoding.
+```python
+df_all_dummy = pd.get_dummies(df_all.select_dtypes(exclude=['float64','int64']))
+df_all = pd.concat([df_all, df_all_dummy], axis=1)
+df_all = df_all.drop(df_all.select_dtypes(exclude=['float64','int64']).columns, axis=1)
+```
+
+### Removing Outliers
+Menghapus outlier pada beberapa kolom yang memiliki nilai ekstrim.
+```python
+outl_col = ['GrLivArea', 'GarageArea', 'TotalBsmtSF', 'LotArea']
+def drop_outliers(x):
+    for col in outl_col:
+        Q1 = x[col].quantile(.25)
+        Q3 = x[col].quantile(.99)
+        IQR = Q3-Q1
+        x = x[(x[col] >= (Q1-(1.5*IQR))) & (x[col] <= (Q3+(1.5*IQR)))]
+    return x
+X = drop_outliers(X)
+```
+
+### Removing Redundant Features
+Fitur-fitur yang memiliki lebih dari 99.94% nilai yang sama dianggap redundan dan dihapus dari dataset.
+```python
+def redundant_feature(df):
+    redundant = []
+    for i in df.columns:
+        if df[i].value_counts().iloc[0] / len(df) * 100 > 99.94:
+            redundant.append(i)
+    return redundant
+
+redundant_features = redundant_feature(X)
+X = X.drop(redundant_features, axis=1)
+Z_test = Z_test.drop(redundant_features, axis=1)
+```
+
+### Final Dataset Shape
+Menampilkan ukuran dataset setelah semua tahap persiapan data selesai.
+```python
+print('Train Data Shape:', X.shape)
+print('Test Data Shape:', Z_test.shape)
+```
+| No  | Data Shape     | Row            | Column  |
+|-----|----------------|----------------|---------|
+| 1   | Train Data     | 1453           | 366     | 
+| 2   | Test Data      | 1459           | 366     |
+
 
 ## Modeling
-Tahapan ini membahas mengenai model machine learning yang digunakan untuk menyelesaikan permasalahan. Anda perlu menjelaskan tahapan dan parameter yang digunakan pada proses pemodelan.
+Pada bagian ini, membahas beberapa algoritma yang digunakan dalam pemodelan, yaitu `Ridge Regression`, `Lasso Regression`, `ElasticNet Regression`, dan `Support Vector Regression (SVR)`. Selain itu, juga melakukan hyperparameter tuning untuk meningkatkan kinerja beberapa model. Berikut penjelasan tentang tahapan dan parameter yang digunakan dalam proses pemodelan:
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan kelebihan dan kekurangan dari setiap algoritma yang digunakan.
-- Jika menggunakan satu algoritma pada solution statement, lakukan proses improvement terhadap model dengan hyperparameter tuning. **Jelaskan proses improvement yang dilakukan**.
-- Jika menggunakan dua atau lebih algoritma pada solution statement, maka pilih model terbaik sebagai solusi. **Jelaskan mengapa memilih model tersebut sebagai model terbaik**.
+**1. Ridge Regression**
+Ridge Regression menambahkan regularisasi untuk mengurangi overfitting. Hyperparameter yang dituning adalah alpha, yang mengontrol seberapa besar regularisasi yang diterapkan.
+
+- Tuning: Hyperparameter alpha dicari melalui `GridSearchCV` dengan nilai-nilai yang diuji antara `5` hingga `15`.
+- Kelebihan: Mengatasi overfitting dan cocok untuk data dengan multikolinearitas tinggi.
+- Kekurangan: Bisa menghasilkan bias jika regularisasi terlalu kuat.
+
+**2. Lasso Regression**
+Lasso Regression menerapkan `regularisasi L1` yang juga membantu feature selection karena dapat membuat beberapa koefisien menjadi nol.
+
+- Tuning: Pada contoh ini, alpha diset ke `0.001` untuk memberikan regularisasi moderat.
+- Kelebihan: Selain mengatasi `overfitting`, Lasso dapat digunakan untuk memilih fitur yang relevan dengan membuat koefisien fitur yang kurang penting menjadi nol.
+- Kekurangan: Bisa menghilangkan fitur yang sebenarnya masih memiliki kontribusi kecil namun signifikan.
+
+3. ElasticNet Regression
+ElasticNet menggabungkan `L1 dan L2 regularisasi`, memberikan fleksibilitas lebih dengan hyperparameter alpha dan l1_ratio.
+
+- Tuning: Pada contoh ini, digunakan `alpha=0.001` dan `l1_ratio=0.5` untuk menggabungkan pengaruh Lasso dan Ridge.
+- Kelebihan: Menggabungkan manfaat dari Ridge dan Lasso, baik dalam mengatasi multikolinearitas maupun feature selection.
+- Kekurangan: Perlu pengaturan dua hyperparameter (alpha dan l1_ratio) sehingga membutuhkan tuning yang lebih intensif.
+
+4. Support Vector Regression (SVR)
+SVR adalah metode berbasis kernel yang sangat kuat dalam menangani hubungan non-linear di data.
+
+- Tuning: Parameter C, epsilon, dan gamma diatur untuk memaksimalkan kinerja model. Di sini digunakan `C=19`, `epsilon=0.008`, dan `gamma=0.00015`.
+- Kelebihan: Kuat dalam memprediksi data non-linear, mampu menangani outliers lebih baik dibanding model linear.
+- Kekurangan: Proses komputasi bisa menjadi lebih lambat terutama pada dataset yang besar, serta hyperparameter tuning lebih kompleks.
+
+### Improvement Process
+- `Ridge Regression` menggunakan `GridSearchCV` untuk menemukan nilai alpha terbaik. Proses tuning ini membantu menemukan nilai regularisasi yang tepat agar model tidak overfitting, namun tetap mempertahankan akurasi prediksi.
+- Setiap model diuji pada data yang sudah di-scale menggunakan RobustScaler untuk memastikan bahwa regularisasi yang diterapkan memiliki efek yang seimbang pada setiap fitur.
 
 ## Evaluation
-Pada bagian ini anda perlu menyebutkan metrik evaluasi yang digunakan. Lalu anda perlu menjelaskan hasil proyek berdasarkan metrik evaluasi yang digunakan.
+Evaluasi model dilakukan dengan menggunakan dua metrik utama:
+1. MSE (Mean Squared Error) - Metrik ini mengukur seberapa besar rata-rata kesalahan kuadrat antara prediksi dan nilai aktual. Semakin kecil MSE, semakin baik model dalam memprediksi nilai target.
+2. RMSE (Root Mean Squared Error) - RMSE memberikan nilai yang lebih intuitif karena satuannya sama dengan target variabel, dan sensitif terhadap outliers.
 
-Sebagai contoh, Anda memiih kasus klasifikasi dan menggunakan metrik **akurasi, precision, recall, dan F1 score**. Jelaskan mengenai beberapa hal berikut:
-- Penjelasan mengenai metrik yang digunakan
-- Menjelaskan hasil proyek berdasarkan metrik evaluasi
+### Hasil Evaluaiton
+| Model                   | RMSE Train | MSE Train | RMSE Test | MSE Test |
+|--------------------------|------------|-----------|-----------|----------|
+| Ridge Regression          | 0.0835     | 0.00697   | 0.1067    | 0.01137  |
+| Lasso Regression          | 0.0957     | 0.00917   | 0.1049    | 0.01100  |
+| ElasticNet Regression     | 0.0899     | 0.00807   | 0.1050    | 0.01102  |
+| Support Vector Regressor  | 0.0918     | 0.00843   | 0.1046    | 0.01093  |
 
-Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, problem statement, dan solusi yang diinginkan.
+### Penjelasan Metrik yang Digunakan
+Dalam proyek ini, dua metrik evaluasi utama yang digunakan adalah **Mean Squared Error (MSE)** dan **Root Mean Squared Error (RMSE)**. Kedua metrik ini dipilih karena permasalahan yang dihadapi adalah **regresi**, di mana model diharapkan dapat memprediksi nilai numerik (kontinu).
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan formula metrik dan bagaimana metrik tersebut bekerja.
+1. **Mean Squared Error (MSE)**  
+   MSE menghitung rata-rata dari kuadrat perbedaan antara nilai sebenarnya yᵢ dan nilai prediksi ŷᵢ. Formula MSE adalah: <br>
+<img src="https://github.com/shendyeff/learn-dicoding/blob/22175d409e1f605adcf19713fbd7b127320505fb/Submission/Regression%20House%20Proce%20Prediction/Assets/mse-formula.png">
 
-**---Ini adalah bagian akhir laporan---**
+   Di mana:
+   - `n` adalah jumlah data,
+   - `yᵢ` adalah nilai sebenarnya,
+   - `ŷᵢ` adalah nilai prediksi.
+
+   MSE memberikan penalti lebih tinggi terhadap kesalahan yang lebih besar karena perbedaan di kuadratkan.
+
+3. **Root Mean Squared Error (RMSE)**  
+   RMSE adalah akar dari MSE, yang mengubah satuan kesalahan menjadi satuan yang sama dengan target variabel. Formula RMSE adalah: <br>
+   <img src="https://github.com/shendyeff/learn-dicoding/blob/22175d409e1f605adcf19713fbd7b127320505fb/Submission/Regression%20House%20Proce%20Prediction/Assets/rmse-formula.png">
+
+   RMSE lebih intuitif karena nilai error berada pada skala yang sama dengan nilai prediksi.
+
+### Hasil Proyek Berdasarkan Metrik Evaluasi
+
+Empat model regresi telah dievaluasi, dan hasil evaluasi menunjukkan bahwa model **Support Vector Regressor (SVR)** memberikan performa terbaik pada data testing dengan **MSE Test** sebesar 0.01093 dan **RMSE Test** sebesar 0.1046. SVR dipilih sebagai model terbaik karena menghasilkan kesalahan prediksi paling kecil pada data uji.
+
+### Pemilihan Model Terbaik
+
+Model **SVR** lebih unggul karena mampu menangani dataset yang memiliki non-linearitas, yang mungkin menjadi alasan mengapa model ini outperform model regresi linear seperti Ridge dan Lasso.
+
+### Perbandingan Kinerja Model
+<img src="https://github.com/shendyeff/learn-dicoding/blob/f31d545424ac7670a38fd10f8395da9aef5649ed/Submission/Regression%20House%20Proce%20Prediction/Assets/perbandingan-kinerja-model.png">
 
 # Referensi 
 1. Aswin Sivam Ravikumar. Real Estate Price Prediction Using Machine Learning. MSc Research Project, Data Analytics, School of Computing, National College of Ireland, Supervisor: Thibaut Lust. [https://norma.ncirl.ie/3096/1/aswinsivamravikumar.pdf](https://norma.ncirl.ie/3096/1/aswinsivamravikumar.pdf)
 2. Alistair Adair, Stanley McGreal. The Application of Multiple Regression Analysis in Property Valuation. Journal of Valuation, ISSN: 0263-7480. [https://www.emerald.com/insight/content/doi/10.1108/eb008022/full/html](https://www.emerald.com/insight/content/doi/10.1108/eb008022/full/html)
 3. Winky K.O. Ho, Bo-Sin Tang, Siu Wai Wong. Predicting Property Prices with Machine Learning Algorithms. Journal of Property Research, 38:1, 48-70, DOI: 10.1080/09599916.2020.1832558. [https://www.researchgate.net/publication/346308101_Predicting_property_prices_with_machine_learning_algorithms](https://www.researchgate.net/publication/346308101_Predicting_property_prices_with_machine_learning_algorithms)
-
-
-_Catatan:_
-- _Anda dapat menambahkan gambar, kode, atau tabel ke dalam laporan jika diperlukan. Temukan caranya pada contoh dokumen markdown di situs editor [Dillinger](https://dillinger.io/), [Github Guides: Mastering markdown](https://guides.github.com/features/mastering-markdown/), atau sumber lain di internet. Semangat!_
-- Jika terdapat penjelasan yang harus menyertakan code snippet, tuliskan dengan sewajarnya. Tidak perlu menuliskan keseluruhan kode project, cukup bagian yang ingin dijelaskan saja.
