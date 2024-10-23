@@ -29,7 +29,7 @@ Jawaban untuk masalah pertama adalah dengan menggunakan beberapa algoritma machi
 2. Mengurangi risiko overfitting dan meningkatkan generalisasi model
 Untuk menangani overfitting, model akan dilatih menggunakan teknik regularisasi seperti yang diterapkan pada Ridge dan Lasso Regression, serta dengan menggunakan cross-validation untuk menguji performa model pada data yang belum pernah dilihat sebelumnya.
 
-3.Melakukan feature selection untuk meningkatkan interpretabilitas model
+3. Melakukan feature selection untuk meningkatkan interpretabilitas model
 Dengan menggunakan teknik Lasso Regression, fitur-fitur yang tidak terlalu signifikan dapat dihilangkan karena Lasso mendorong koefisien dari fitur-fitur tersebut menjadi nol. Ini akan membantu kita fokus pada variabel-variabel yang paling berpengaruh.
 
 ### Solution Statements
@@ -45,9 +45,25 @@ Untuk mengoptimalkan hasil, setiap model akan menjalani hyperparameter tuning me
 Solusi yang diusulkan akan dievaluasi dengan menggunakan beberapa metrik evaluasi seperti RMSE dan MSE. Model dengan nilai RMSE terendah dianggap sebagai model terbaik karena menunjukkan bahwa model tersebut memiliki kesalahan prediksi yang lebih kecil.
 
 ## Data Understanding
+### Informasi Dataset
+```python
+print(train.shape)
+print(test.shape)
+```
+Train Dataset
+Row     | Column
+--------|-------
+| 1460  | 81
+
+Test Dataset
+Row     | Column
+--------|-------
+| 1459  | 80
+
+### Sumber Dataset
 Pada proyek ini, dataset yang digunakan adalah House Prices - Advanced Regression Techniques Dataset, yang merupakan dataset yang digunakan pada kompetisi di kaggle dalam pemodelan harga rumah. Dataset ini berisi berbagai informasi detail tentang properti yang dapat mempengaruhi harga jual rumah. Dataset ini tersedia secara publik dan dapat diunduh dari Kaggle [House Prices - Advanced Regression Techniques](https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques/data.)
 
-## Informasi Dataset
+### Feature Data
 | No  | Column         | Non-Null Count | Dtype   | Description                                                |
 |-----|----------------|----------------|---------|------------------------------------------------------------|
 | 1   | Id             | 1460           | int64   | Unique identifier for each property.                       |
@@ -157,17 +173,6 @@ Pada proyek ini, dataset yang digunakan adalah House Prices - Advanced Regressio
 
 `Ada 19 attributes punya missing values and 5 features (PoolQC, MiscFeature, Alley, Fence, FireplaceQu) punya missing values lebih besar dari 45%`
 
-### Pembagian Feature
-`Numerical features`: 1stFlrSF, 2ndFlrSF, 3SsnPorch, BedroomAbvGr, BsmtFinSF1, BsmtFinSF2, BsmtFullBath, BsmtHalfBath, BsmtUnfSF, EnclosedPorch, Fireplaces, FullBath, GarageArea, GarageCars, GarageYrBlt, GrLivArea, HalfBath, KitchenAbvGr, LotArea, LotFrontage, LowQualFinSF, MSSubClass, MasVnrArea, MiscVal, MoSold, OpenPorchSF, OverallCond, OverallQual, PoolArea, ScreenPorch, TotRmsAbvGrd, TotalBsmtSF, WoodDeckSF, YearBuilt, YearRemodAdd, YrSold
-```python
-numerical = train.select_dtypes(include=['int64','float64']).drop(['SalePrice','Id'],axis=1)
-numerical.head()
-```
-`Categorical features`: Alley, BldgType, BsmtCond, BsmtExposure, BsmtFinType1, BsmtFinType2, BsmtQual, CentralAir, Condition1, Condition2, Electrical, ExterCond, ExterQual, Exterior1st, Exterior2nd, Fence, FireplaceQu, Foundation, Functional, GarageCond, GarageFinish, GarageQual, GarageType, Heating, HeatingQC, HouseStyle, KitchenQual, LandContour, LandSlope, LotConfig, LotShape, MSZoning, MasVnrType, MiscFeature, Neighborhood, PavedDrive, PoolQC, RoofMatl, RoofStyle, SaleCondition, SaleType, Street, Utilities,
-```python
-categorical = train.select_dtypes(exclude=['int64','float64'])
-categorical.head()
-```
 ### Exploratory Data Analysis (EDA)
 #### Plotting missing values on train and test data 
 ```python
@@ -242,6 +247,18 @@ sns.heatmap(train_num.corr(), cmap=sns.diverging_palette(20, 220, n=200), mask =
 
 ## Data Preparation
 
+### Pembagian Feature
+`Numerical features`: 1stFlrSF, 2ndFlrSF, 3SsnPorch, BedroomAbvGr, BsmtFinSF1, BsmtFinSF2, BsmtFullBath, BsmtHalfBath, BsmtUnfSF, EnclosedPorch, Fireplaces, FullBath, GarageArea, GarageCars, GarageYrBlt, GrLivArea, HalfBath, KitchenAbvGr, LotArea, LotFrontage, LowQualFinSF, MSSubClass, MasVnrArea, MiscVal, MoSold, OpenPorchSF, OverallCond, OverallQual, PoolArea, ScreenPorch, TotRmsAbvGrd, TotalBsmtSF, WoodDeckSF, YearBuilt, YearRemodAdd, YrSold
+```python
+numerical = train.select_dtypes(include=['int64','float64']).drop(['SalePrice','Id'],axis=1)
+numerical.head()
+```
+`Categorical features`: Alley, BldgType, BsmtCond, BsmtExposure, BsmtFinType1, BsmtFinType2, BsmtQual, CentralAir, Condition1, Condition2, Electrical, ExterCond, ExterQual, Exterior1st, Exterior2nd, Fence, FireplaceQu, Foundation, Functional, GarageCond, GarageFinish, GarageQual, GarageType, Heating, HeatingQC, HouseStyle, KitchenQual, LandContour, LandSlope, LotConfig, LotShape, MSZoning, MasVnrType, MiscFeature, Neighborhood, PavedDrive, PoolQC, RoofMatl, RoofStyle, SaleCondition, SaleType, Street, Utilities,
+```python
+categorical = train.select_dtypes(exclude=['int64','float64'])
+categorical.head()
+```
+
 ### Handling Outliers
 Outliers dapat mengganggu performa model prediksi, oleh karena itu, perlu dihilangkan dari data.
 ```python
@@ -295,17 +312,43 @@ df_all[skew_index] = transformer.fit_transform(df_all[skew_index])
 ```
 
 ### Feature Engineering
-Membuat fitur-fitur baru yang berguna untuk memperbaiki prediksi seperti `Total_sqr_footage`, `Total_Bathrooms`, dan `Total_porch_sf`.
+- Membuat fitur baru berdasarkan penggabungan atau transformasi dari beberapa kolom yang sudah ada.
+- Fitur-fitur baru tersebut seperti `Total_sqr_footage`, `Total_Bathrooms`, dan `Total_porch_sf` bisa membantu meningkatkan performa model prediksi - karena mereka memberikan gambaran yang lebih menyeluruh tentang kondisi fisik rumah, yang berhubungan langsung dengan harga rumah.
 ```python
-# Menambahkan total luas bangunan dan area basement
+df_all=df_all.drop(['Utilities', 'Street', 'PoolQC'], axis=1) # not useful df_all, evident from above
+# vintage house with remodified version of it plays a important role in prediction(i.e. high price )
+df_all['YrBltAndRemod']=df_all['YearBuilt']+df_all['YearRemodAdd']
+#Overall area for all floors and basement plays an important role, hence creating total area in square foot column
 df_all['Total_sqr_footage'] = (df_all['BsmtFinSF1'] + df_all['BsmtFinSF2'] +
                                  df_all['1stFlrSF'] + df_all['2ndFlrSF'])
+# Creating derived column for total number of bathrooms column
+df_all['Total_Bathrooms'] = (df_all['FullBath'] + (0.5 * df_all['HalfBath']) +
+                               df_all['BsmtFullBath'] + (0.5 * df_all['BsmtHalfBath']))
+#Creating derived column for total porch area
+df_all['Total_porch_sf'] = (df_all['OpenPorchSF'] + df_all['3SsnPorch'] + df_all['EnclosedPorch'] + \
+                              df_all['ScreenPorch'] + df_all['WoodDeckSF'])
 ```
 
-Fitur biner juga ditambahkan untuk memberikan informasi "ada" atau "tidak" secara eksplisit pada fitur seperti has_pool, has_2ndfloor, dll.
+Fitur biner juga ditambahkan untuk memberikan informasi "ada" atau "tidak" secara eksplisit pada fitur seperti `has_pool, has_2ndfloor`, dll.
 ```python
 df_all['has_pool'] = df_all['PoolArea'].apply(lambda x: 1 if x > 0 else 0)
+df_all['has_2ndfloor'] = df_all['2ndFlrSF'].apply(lambda x: 1 if x > 0 else 0)
+df_all['has_garage'] = df_all['GarageArea'].apply(lambda x: 1 if x > 0 else 0)
+df_all['has_bsmt'] = df_all['TotalBsmtSF'].apply(lambda x: 1 if x > 0 else 0)
+df_all['has_fireplace'] = df_all['Fireplaces'].apply(lambda x: 1 if x > 0 else 0)
+df_all['has_openporch'] =df_all['OpenPorchSF'].apply(lambda x: 1 if x > 0 else 0)
+df_all['has_wooddeck'] =df_all['WoodDeckSF'].apply(lambda x: 1 if x > 0 else 0)
+df_all['has_enclosedporch'] = df_all['EnclosedPorch'].apply(lambda x: 1 if x > 0 else 0)
+df_all['has_3ssnporch']=df_all['3SsnPorch'].apply(lambda x: 1 if x > 0 else 0)
+df_all['has_openporch'] = df_all['OpenPorchSF'].apply(lambda x: 1 if x > 0 else 0)
+df_all['has_screenporch'] = df_all['ScreenPorch'].apply(lambda x: 1 if x > 0 else 0)
+df_all['TotalBsmtSF'] = df_all['TotalBsmtSF'].apply(lambda x: np.exp(6) if x <= 0.0 else x)
+df_all['2ndFlrSF'] = df_all['2ndFlrSF'].apply(lambda x: np.exp(6.5) if x <= 0.0 else x)
+df_all['LotFrontage'] = df_all['LotFrontage'].apply(lambda x: np.exp(4.2) if x <= 0.0 else x)
+df_all['MasVnrArea'] = df_all['MasVnrArea'].apply(lambda x: np.exp(4) if x <= 0.0 else x)
+df_all['BsmtFinSF1'] = df_all['BsmtFinSF1'].apply(lambda x: np.exp(6.5) if x <= 0.0 else x)
 ```
+
 ### Log Transformation
 Log transformation diterapkan untuk menangani skewness lebih lanjut pada beberapa fitur numerik.
 ```python
@@ -354,6 +397,11 @@ X = X.drop(redundant_features, axis=1)
 Z_test = Z_test.drop(redundant_features, axis=1)
 ```
 
+### Splitting Train and Test Data
+```python
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+```
+
 ### Final Dataset Shape
 Menampilkan ukuran dataset setelah semua tahap persiapan data selesai.
 ```python
@@ -370,28 +418,28 @@ print('Test Data Shape:', Z_test.shape)
 Pada bagian ini, membahas beberapa algoritma yang digunakan dalam pemodelan, yaitu `Ridge Regression`, `Lasso Regression`, `ElasticNet Regression`, dan `Support Vector Regression (SVR)`. Selain itu, juga melakukan hyperparameter tuning untuk meningkatkan kinerja beberapa model. Berikut penjelasan tentang tahapan dan parameter yang digunakan dalam proses pemodelan:
 
 **1. Ridge Regression**
-Ridge Regression menambahkan regularisasi untuk mengurangi overfitting. Hyperparameter yang dituning adalah alpha, yang mengontrol seberapa besar regularisasi yang diterapkan.
+<br> Ridge Regression menambahkan regularisasi untuk mengurangi overfitting. Hyperparameter yang dituning adalah alpha, yang mengontrol seberapa besar regularisasi yang diterapkan.
 
 - Tuning: Hyperparameter alpha dicari melalui `GridSearchCV` dengan nilai-nilai yang diuji antara `5` hingga `15`.
 - Kelebihan: Mengatasi overfitting dan cocok untuk data dengan multikolinearitas tinggi.
 - Kekurangan: Bisa menghasilkan bias jika regularisasi terlalu kuat.
 
 **2. Lasso Regression**
-Lasso Regression menerapkan `regularisasi L1` yang juga membantu feature selection karena dapat membuat beberapa koefisien menjadi nol.
+<br> Lasso Regression menerapkan `regularisasi L1` yang juga membantu feature selection karena dapat membuat beberapa koefisien menjadi nol.
 
 - Tuning: Pada contoh ini, alpha diset ke `0.001` untuk memberikan regularisasi moderat.
 - Kelebihan: Selain mengatasi `overfitting`, Lasso dapat digunakan untuk memilih fitur yang relevan dengan membuat koefisien fitur yang kurang penting menjadi nol.
 - Kekurangan: Bisa menghilangkan fitur yang sebenarnya masih memiliki kontribusi kecil namun signifikan.
 
 3. ElasticNet Regression
-ElasticNet menggabungkan `L1 dan L2 regularisasi`, memberikan fleksibilitas lebih dengan hyperparameter alpha dan l1_ratio.
+<br> ElasticNet menggabungkan `L1 dan L2 regularisasi`, memberikan fleksibilitas lebih dengan hyperparameter alpha dan l1_ratio.
 
 - Tuning: Pada contoh ini, digunakan `alpha=0.001` dan `l1_ratio=0.5` untuk menggabungkan pengaruh Lasso dan Ridge.
 - Kelebihan: Menggabungkan manfaat dari Ridge dan Lasso, baik dalam mengatasi multikolinearitas maupun feature selection.
 - Kekurangan: Perlu pengaturan dua hyperparameter (alpha dan l1_ratio) sehingga membutuhkan tuning yang lebih intensif.
 
 4. Support Vector Regression (SVR)
-SVR adalah metode berbasis kernel yang sangat kuat dalam menangani hubungan non-linear di data.
+<br >SVR adalah metode berbasis kernel yang sangat kuat dalam menangani hubungan non-linear di data.
 
 - Tuning: Parameter C, epsilon, dan gamma diatur untuk memaksimalkan kinerja model. Di sini digunakan `C=19`, `epsilon=0.008`, dan `gamma=0.00015`.
 - Kelebihan: Kuat dalam memprediksi data non-linear, mampu menangani outliers lebih baik dibanding model linear.
@@ -402,9 +450,13 @@ SVR adalah metode berbasis kernel yang sangat kuat dalam menangani hubungan non-
 - Setiap model diuji pada data yang sudah di-scale menggunakan RobustScaler untuk memastikan bahwa regularisasi yang diterapkan memiliki efek yang seimbang pada setiap fitur.
 
 ## Evaluation
+Problem statement yang diajukan dalam proyek ini berfokus pada prediksi harga rumah. Tujuan utama adalah mengembangkan model yang dapat menghasilkan prediksi akurat, sehingga memberikan nilai tambah bagi bisnis dalam membuat keputusan terkait investasi, penjualan, atau pembelian properti.
+
+Model-model yang diuji diantarnya `Ridge Regression`, `Lasso Regression`, `ElasticNet Regression`, dan `Support Vector Regressor (SVR)` menunjukkan hasil yang beragam dengan metrik RMSE dan MSE pada data training dan testing. Secara umum, semua model memberikan hasil yang cukup baik dalam meminimalkan error, meskipun terdapat perbedaan performa di antara model-model tersebut.
+
 Evaluasi model dilakukan dengan menggunakan dua metrik utama:
-1. MSE (Mean Squared Error) - Metrik ini mengukur seberapa besar rata-rata kesalahan kuadrat antara prediksi dan nilai aktual. Semakin kecil MSE, semakin baik model dalam memprediksi nilai target.
-2. RMSE (Root Mean Squared Error) - RMSE memberikan nilai yang lebih intuitif karena satuannya sama dengan target variabel, dan sensitif terhadap outliers.
+1. `MSE (Mean Squared Error)` - Metrik ini mengukur seberapa besar rata-rata kesalahan kuadrat antara prediksi dan nilai aktual. Semakin kecil MSE, semakin baik model dalam memprediksi nilai target.
+2. `RMSE (Root Mean Squared Error)` - RMSE memberikan nilai yang lebih intuitif karena satuannya sama dengan target variabel, dan sensitif terhadap outliers.
 
 ### Hasil Evaluaiton
 | Model                   | RMSE Train | MSE Train | RMSE Test | MSE Test |
@@ -415,35 +467,54 @@ Evaluasi model dilakukan dengan menggunakan dua metrik utama:
 | Support Vector Regressor  | 0.0918     | 0.00843   | 0.1046    | 0.01093  |
 
 ### Penjelasan Metrik yang Digunakan
-Dalam proyek ini, dua metrik evaluasi utama yang digunakan adalah **Mean Squared Error (MSE)** dan **Root Mean Squared Error (RMSE)**. Kedua metrik ini dipilih karena permasalahan yang dihadapi adalah **regresi**, di mana model diharapkan dapat memprediksi nilai numerik (kontinu).
+Dalam proyek ini, dua metrik evaluasi utama yang digunakan adalah `Mean Squared Error (MSE)` dan `Root Mean Squared Error (RMSE)`. Kedua metrik ini dipilih karena permasalahan yang dihadapi adalah **regresi**, di mana model diharapkan dapat memprediksi nilai numerik (kontinu).
 
 1. **Mean Squared Error (MSE)**  
    MSE menghitung rata-rata dari kuadrat perbedaan antara nilai sebenarnya yᵢ dan nilai prediksi ŷᵢ. Formula MSE adalah: <br>
-<img src="https://github.com/shendyeff/learn-dicoding/blob/22175d409e1f605adcf19713fbd7b127320505fb/Submission/Regression%20House%20Proce%20Prediction/Assets/mse-formula.png">
+   
+![mse-formula](https://github.com/user-attachments/assets/320dda67-89ae-4b13-84af-b7f7b946d098)
 
    Di mana:
    - `n` adalah jumlah data,
    - `yᵢ` adalah nilai sebenarnya,
    - `ŷᵢ` adalah nilai prediksi.
 
-   MSE memberikan penalti lebih tinggi terhadap kesalahan yang lebih besar karena perbedaan di kuadratkan.
+   `MSE` memberikan penalti lebih tinggi terhadap kesalahan yang lebih besar karena perbedaan di kuadratkan.
 
 3. **Root Mean Squared Error (RMSE)**  
    RMSE adalah akar dari MSE, yang mengubah satuan kesalahan menjadi satuan yang sama dengan target variabel. Formula RMSE adalah: <br>
-   <img src="https://github.com/shendyeff/learn-dicoding/blob/22175d409e1f605adcf19713fbd7b127320505fb/Submission/Regression%20House%20Proce%20Prediction/Assets/rmse-formula.png">
 
-   RMSE lebih intuitif karena nilai error berada pada skala yang sama dengan nilai prediksi.
+![rmse-formula](https://github.com/user-attachments/assets/6438ec34-817f-4a19-aab9-82ba66d36649)
 
-### Hasil Proyek Berdasarkan Metrik Evaluasi
+   `RMSE` lebih intuitif karena nilai error berada pada skala yang sama dengan nilai prediksi.
 
-Empat model regresi telah dievaluasi, dan hasil evaluasi menunjukkan bahwa model **Support Vector Regressor (SVR)** memberikan performa terbaik pada data testing dengan **MSE Test** sebesar 0.01093 dan **RMSE Test** sebesar 0.1046. SVR dipilih sebagai model terbaik karena menghasilkan kesalahan prediksi paling kecil pada data uji.
+### Hasil Evaluasi:
+1. `Ridge Regression` memberikan hasil RMSE test sebesar 0.1067, yang cukup mendekati hasil model lain dan stabil dalam generalisasi ke data testing.
+2. `Lasso Regression` dan `ElasticNet Regression` juga memberikan hasil yang serupa dalam hal RMSE test (sekitar 0.1050), menunjukkan performa yang mirip namun mungkin tidak setepat Ridge dalam beberapa kasus.
+3. `Support Vector Regressor (SVR)` memberikan RMSE test terbaik di 0.1046, yang menunjukkan performa unggul di antara model-model lainnya dalam hal akurasi prediksi.
 
 ### Pemilihan Model Terbaik
-
-Model **SVR** lebih unggul karena mampu menangani dataset yang memiliki non-linearitas, yang mungkin menjadi alasan mengapa model ini outperform model regresi linear seperti Ridge dan Lasso.
+Model `SVR` lebih unggul karena mampu menangani dataset yang memiliki non-linearitas, yang mungkin menjadi alasan mengapa model ini outperform model regresi linear seperti `Ridge` dan `Lasso`.
 
 ### Perbandingan Kinerja Model
-<img src="https://github.com/shendyeff/learn-dicoding/blob/f31d545424ac7670a38fd10f8395da9aef5649ed/Submission/Regression%20House%20Proce%20Prediction/Assets/perbandingan-kinerja-model.png">
+![perbandingan-kinerja-model](https://github.com/user-attachments/assets/3c8eeae8-56d7-4803-8e71-877550025202)
+
+### Apakah Berhasil Mencapai Goals yang Diharapkan?
+Goals yang diharapkan dalam proyek ini adalah menghasilkan model dengan error yang rendah (berdasarkan MSE dan RMSE) dan model yang mampu melakukan generalisasi dengan baik ke data yang belum pernah dilihat sebelumnya. Hasil evaluasi menunjukkan bahwa:
+
+- Semua model memiliki MSE dan RMSE yang cukup rendah baik di training maupun testing, yang berarti model dapat melakukan prediksi yang cukup akurat.
+- Perbedaan antara MSE dan RMSE di data training dan testing relatif kecil, menunjukkan bahwa model tidak mengalami overfitting atau underfitting yang signifikan.
+Dengan demikian, goals yang diharapkan berhasil tercapai.
+
+### Apakah Solusi Statement Berdampak?
+Solusi statement yang diajukan adalah dengan menggunakan beberapa model regresi untuk memprediksi harga rumah, dan melakukan hyperparameter tuning untuk meningkatkan performa. Dalam evaluasi ini:
+
+- Hyperparameter tuning, khususnya pada `Ridge Regression` dan `SVR`, memberikan dampak yang positif terhadap hasil prediksi.
+- `SVR` menunjukkan `performa terbaik` di antara model-model lain, yang berarti solusi statement dengan menggunakan berbagai model serta melakukan tuning menghasilkan solusi yang berdampak dan membantu dalam mencapai prediksi yang lebih akurat.
+- Secara keseluruhan, solusi yang direncanakan telah berdampak positif dan menghasilkan model yang tidak hanya menjawab problem statement, tetapi juga memberikan hasil prediksi yang dapat diandalkan sesuai dengan goals proyek.
+
+## Kesimpulan
+Model yang diuji dan dievaluasi dalam proyek ini berhasil menjawab problem statement, mencapai goals yang diharapkan, dan memberikan solusi yang berdampak bagi business understanding. `Support Vector Regressor (SVR)` adalah model terbaik berdasarkan hasil RMSE dan MSE, namun model lain seperti Ridge Regression juga memberikan performa yang cukup baik dan layak dipertimbangkan dalam solusi akhir.
 
 # Referensi 
 1. Aswin Sivam Ravikumar. Real Estate Price Prediction Using Machine Learning. MSc Research Project, Data Analytics, School of Computing, National College of Ireland, Supervisor: Thibaut Lust. [https://norma.ncirl.ie/3096/1/aswinsivamravikumar.pdf](https://norma.ncirl.ie/3096/1/aswinsivamravikumar.pdf)
