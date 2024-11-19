@@ -406,7 +406,7 @@ history = model.fit(
     batch_size=64
 )
 ```
-<img src="https://github.com/user-attachments/assets/de06bdb1-e8a3-486a-b2b4-8574c3584ad5" width="700" height="500"> <br>
+<img src="https://github.com/user-attachments/assets/a934dd8d-ed2f-4a0e-a089-592a4d1d18aa" width="700" height="500"> <br>
 
 ### Sistem Rekomendasi Menggunakan Collaborative Filltering
 ```python
@@ -442,10 +442,44 @@ Top 10 rekomendasi film untuk `user 70`
 | 6799     | Jal                                           |
 | 2301     | '76                                           |
 
+### Content Based Filltering VS Collaborative Filltering
+Pada proyek sistem rekomendasi ini, dua pendekatan utama telah diimplementasikan dan dibandingkan, yaitu `Content-Based Filtering` dan `Collaborative Filtering`. Berikut adalah kesimpulan berdasarkan penerapan dan evaluasi kedua metode tersebut:
 
+1. Content-Based Filtering
+Metode ini merekomendasikan item berdasarkan kesamaan antara konten item yang disukai pengguna sebelumnya. Misalnya, jika seorang pengguna sering menonton film bergenre komedi, sistem akan merekomendasikan film lain yang memiliki genre serupa.
 
+Kelebihan:
+* Rekomendasi dapat disesuaikan dengan preferensi pengguna secara spesifik, karena algoritma menganalisis konten film yang sudah disukai.
+* Metode ini bekerja hanya dengan data pengguna tertentu, sehingga berguna untuk menangani masalah cold start ketika data pengguna baru terbatas.
+
+Kekurangan:
+* Rekomendasi cenderung berfokus pada jenis konten yang sama, sehingga sulit bagi pengguna untuk menemukan item di luar preferensi mereka.
+* Kualitas rekomendasi sangat bergantung pada data deskriptif item. Metadata yang tidak lengkap atau kurang akurat dapat mempengaruhi kinerja.
+
+2. Collaborative Filtering
+Metode ini memberikan rekomendasi berdasarkan preferensi pengguna lain yang memiliki kesamaan pola. Collaborative filtering menggunakan informasi dari banyak pengguna untuk menyarankan item yang relevan.
+
+Kelebihan:
+* Karena rekomendasi tidak hanya berdasarkan konten, pengguna dapat menemukan film yang mungkin belum pernah mereka pertimbangkan tetapi disukai oleh pengguna lain dengan preferensi yang mirip.
+* Model ini mampu beradaptasi dengan baik terhadap berbagai jenis data yang berbeda.
+
+Kekurangan:
+* Jika ada pengguna baru atau film baru tanpa rating atau ulasan, sistem tidak dapat memberikan rekomendasi yang akurat.
+* Collaborative filtering berbasis memory-based memerlukan daya komputasi yang besar untuk dataset yang sangat besar, meskipun pendekatan berbasis model (seperti Matrix Factorization) dapat mengatasi masalah ini.
+
+### Perbandingan Hasil dan Kinerja
+
+* Content-Based Filtering cenderung lebih stabil untuk pengguna dengan sejarah tontonan yang jelas dan membutuhkan preferensi yang spesifik. Namun, rekomendasi bisa menjadi monoton karena hanya berkisar pada jenis konten tertentu.
+* Collaborative Filtering menunjukkan performa yang baik dalam memberikan rekomendasi yang beragam dan lebih personal, terutama jika data pengguna dan film mencukupi. Pendekatan ini umumnya lebih efektif dalam menangkap pola kompleks di antara pengguna.
+
+### Kesimpulan
+Untuk proyek ini, Collaborative Filtering dengan pendekatan matrix factorization cenderung memberikan hasil yang lebih baik dalam menciptakan rekomendasi yang bervariasi dan lebih akurat. Namun, Content-Based Filtering bisa digunakan sebagai pelengkap, terutama ketika menangani pengguna baru dengan sedikit data.
+
+Kombinasi atau hybrid system antara keduanya dapat dipertimbangkan untuk memperoleh kelebihan dari masing-masing pendekatan, meminimalkan kelemahan, dan meningkatkan kualitas sistem rekomendasi secara keseluruhan.
 
 ## Evaluation
+Untuk proyek sistem rekomendasi ini, metrik evaluasi yang digunakan adalah Root Mean Squared Error (RMSE) dan Mean Squared Error (MSE). Kedua metrik ini digunakan untuk mengukur akurasi prediksi rating film terhadap rating yang sebenarnya.
+
 ```python
 import matplotlib.pyplot as plt
 
@@ -468,17 +502,44 @@ plt.ylabel('RMSE')
 plt.tight_layout()
 plt.show()
 ```
-<img src="https://github.com/user-attachments/assets/e9a1f055-f48c-4522-9ff5-890a60fe6c1f" width="700" height="500"> <br>
+<img src="https://github.com/user-attachments/assets/8c17b2b0-051c-4418-aa0e-a36cafdffa60" width="700" height="500"> <br>
 
+1. Root Mean Squared Error (RMSE)
+RMSE adalah salah satu metrik yang umum digunakan dalam sistem rekomendasi untuk mengukur seberapa akurat prediksi model terhadap data asli. RMSE memberikan gambaran mengenai seberapa besar kesalahan model dalam memprediksi rating, di mana semakin rendah nilai RMSE, semakin baik performa model dalam memprediksi rating yang tepat. <br>
 
-Pada bagian ini Anda perlu menyebutkan metrik evaluasi yang digunakan. Kemudian, jelaskan hasil proyek berdasarkan metrik evaluasi tersebut.
+Formula RMSE: <br>
 
-Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, problem statement, dan solusi yang diinginkan.
+$$
+\text{RMSE} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2}
+$$
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan formula metrik dan bagaimana metrik tersebut bekerja.
+Di mana:
+- $y_i$ adalah rating asli (ground truth),
+- $\hat{y}_i$ adalah rating yang diprediksi oleh model,
+- $n$ adalah jumlah prediksi (data).
 
+RMSE menghitung selisih kuadrat antara rating yang sebenarnya dan yang diprediksi, kemudian merata-ratakan dan menghitung akar kuadrat dari hasil tersebut. Hasil yang lebih rendah menunjukkan kesalahan yang lebih kecil.
 
-_Catatan:_
-- _Anda dapat menambahkan gambar, kode, atau tabel ke dalam laporan jika diperlukan. Temukan caranya pada contoh dokumen markdown di situs editor [Dillinger](https://dillinger.io/), [Github Guides: Mastering markdown](https://guides.github.com/features/mastering-markdown/), atau sumber lain di internet. Semangat!_
-- Jika terdapat penjelasan yang harus menyertakan code snippet, tuliskan dengan sewajarnya. Tidak perlu menuliskan keseluruhan kode project, cukup bagian yang ingin dijelaskan saja.
+2. Mean Squared Error (MSE)
+MSE adalah metrik yang menghitung rata-rata dari kuadrat selisih antara rating asli dan rating yang diprediksi. MSE memberikan bobot yang lebih besar pada kesalahan besar, karena kesalahan dihitung dalam bentuk kuadrat. Metrik ini sangat berguna untuk meminimalkan kesalahan yang besar, meskipun RMSE lebih mudah diinterpretasikan karena berada dalam skala yang sama dengan rating yang sebenarnya.
+
+Formula MSE: <br>
+
+$$
+\text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
+$$
+
+Di mana:
+- $y_i$ adalah rating asli (ground truth),
+- $\hat{y}_i$ adalah rating yang diprediksi oleh model,
+- $n$ adalah jumlah prediksi (data).
+
+### Evaluasi Hasil Berdasarkan Metrik
+Setelah model dilatih, kita dapat mengevaluasi performanya dengan melihat nilai RMSE dan MSE pada data pengujian (test data). Jika nilai RMSE dan MSE rendah, maka model dapat dianggap lebih baik karena prediksi rating yang lebih dekat dengan nilai sebenarnya.
+
+### Hasil Proyek
+1. MSE cenderung menunjukkan penurunan yang stabil sepanjang proses training, yang berarti model semakin baik dalam mengurangi error kuadrat antara prediksi dan nilai asli. Pada epoch terakhir, nilai MSE mencapai `0.0038`, menunjukkan bahwa model telah memperkecil kesalahan prediksi.
+
+2. RMSE juga menurun seiring berjalannya waktu, meskipun tidak secepat penurunan MSE. RMSE memberikan gambaran yang lebih jelas mengenai ukuran kesalahan prediksi dalam satuan yang lebih mudah dipahami (dalam hal ini, unit rating). Pada epoch terakhir, nilai RMSE mencapai `1.8416`, yang menunjukkan bahwa meskipun model sudah belajar dengan cukup baik, masih ada ruang untuk perbaikan.
+
+3. Berdasarkan evaluasi yang ada, model sudah cukup baik karena MSE dan RMSE menunjukkan penurunan yang signifikan. RMSE sebesar 1.84 menunjukkan kesalahan yang tidak terlalu besar, namun bisa jadi ada ruang untuk penyempurnaan lebih lanjut, terutama jika target Anda adalah mendapatkan prediksi yang lebih akurat atau meningkatkan relevansi rekomendasi. Evaluasi lebih lanjut dengan data nyata dan perbandingan terhadap model lain akan memberi gambaran yang lebih jelas tentang performa model Anda.
