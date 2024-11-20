@@ -708,6 +708,41 @@ Kombinasi atau hybrid system antara keduanya dapat dipertimbangkan untuk mempero
    | Recall@10     | 1.0                                         |
    | F1-Score@10   | 0.5714285714285715                          |
 
+   ### Metrik Evaluasi: Precision, Recall, dan F1-Score
+
+   #### 1. Precision
+   Precision mengukur seberapa banyak item yang direkomendasikan yang relevan dibandingkan dengan jumlah total item yang direkomendasikan.
+
+   Formula Precision:
+
+   $$
+   \text{Precision} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Positives (FP)}}
+   $$
+
+   Penjelasan: Precision yang tinggi berarti sistem jarang memberikan rekomendasi yang tidak relevan.
+
+   #### 2. Recall
+   Recall mengukur seberapa banyak item relevan yang direkomendasikan dibandingkan dengan total item relevan yang ada.
+
+   Formula Recall:
+
+   $$
+   \text{Recall} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Negatives (FN)}}
+   $$
+
+   Penjelasan: Recall yang tinggi berarti sistem mampu menangkap semua item relevan dalam rekomendasinya.
+
+   #### 3. F1-Score
+   F1-Score adalah rata-rata harmonik dari precision dan recall. Digunakan ketika Anda ingin menyeimbangkan antara precision dan recall.
+
+   Formula F1-Score:
+
+   $$
+   \text{F1-Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
+   $$
+
+   Penjelasan: F1-Score memberikan gambaran tentang keseimbangan antara precision dan recall. Nilai F1-Score yang tinggi menunjukkan bahwa sistem mampu memberikan hasil yang relevan secara konsisten.
+
    ### Hasil Metrics Evaluasi
    Precision@10: 0.4
    * Precision mengukur seberapa banyak film yang direkomendasikan dalam 10 teratas yang benar-benar relevan. Hasil 0.4 berarti bahwa 40% dari 10 rekomendasi yang diberikan oleh sistem benar-benar relevan menurut ground truth.
