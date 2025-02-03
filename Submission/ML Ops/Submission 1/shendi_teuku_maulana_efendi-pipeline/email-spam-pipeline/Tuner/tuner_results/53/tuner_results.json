@@ -1,0 +1,1 @@
+[{"trial_id": "0", "score": 0.9463459849357605, "embedding_dim": 32, "lstm_units": 16, "dense_units": 128, "dropout_rate": 0.1, "learning_rate": 0.001, "num_layers": 2}]

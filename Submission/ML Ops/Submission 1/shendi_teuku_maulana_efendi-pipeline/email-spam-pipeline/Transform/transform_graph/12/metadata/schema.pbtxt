@@ -1,0 +1,32 @@
+feature {
+  name: "Category"
+  type: BYTES
+  domain: "Category"
+  presence {
+    min_fraction: 1.0
+    min_count: 1
+  }
+  shape {
+    dim {
+      size: 1
+    }
+  }
+}
+feature {
+  name: "Message"
+  type: BYTES
+  presence {
+    min_fraction: 1.0
+    min_count: 1
+  }
+  shape {
+    dim {
+      size: 1
+    }
+  }
+}
+string_domain {
+  name: "Category"
+  value: "ham"
+  value: "spam"
+}
