@@ -1,4 +1,4 @@
-# **Submission 1: Spam Email Machine Learning Pipeline**
+# **Submission 1 - SpamFilter AI: Classifying Emails as Spam or Not Using Deep Learning**
 
 **Nama:** `Shendi Teuku Maulana Efendi`<br>
 **Username Dicoding:** `shendyeff`
