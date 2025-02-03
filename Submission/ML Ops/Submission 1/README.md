@@ -1,124 +1,16 @@
-# Submission 1: Nama Proyek Anda
+# **Submission 1: Spam Email Machine Learning Pipeline**
 
-Nama: `Shendi Teuku Maulana Efendi`
+**Nama:** `Shendi Teuku Maulana Efendi`<br>
+**Username Dicoding:** `shendyeff`
 
-Username dicoding: `shendyeff`
+<img src="https://github.com/shendyeff/learn-dicoding/blob/cde398abc771d0a04304a8e35ec964b55b203011/Submission/ML%20Ops/Submission%201/assets/cover.png">
 
 |                         | Deskripsi                                                                       |
 | ----------------------- | ------------------------------------------------------------------------------- |
-| Dataset                 | [Spam Email Dataset](https://www.kaggle.com/datasets/mfaisalqureshi/spam-email) |
-| Masalah                 | Deskripsi masalah yang di angkat                                                |
-| Solusi machine learning | Deskripsi solusi machine learning yang akan dibuat                              |
-| Metode pengolahan       | Deskripsi metode pengolahan data yang digunakan                                 |
-| Arsitektur model        | Deskripsi arsitektur model yang diguanakan                                      |
-| Metrik evaluasi         | Deksripsi metrik yang digunakan untuk mengevaluasi performa model               |
-| Performa model          | Deksripsi performa model yang dibuat                                            |
-
-## **Spam Email Machine Learning Pipeline**
-
-## **Deskripsi Proyek**
-
-Seiring dengan meningkatnya penggunaan pesan teks sebagai sarana komunikasi, spam menjadi salah satu masalah yang cukup mengganggu. Pesan spam sering kali berupa iklan, penipuan, atau konten yang tidak diinginkan oleh penerima. Oleh karena itu, diperlukan sistem otomatis yang dapat mengidentifikasi dan memisahkan pesan spam dari pesan yang sah secara akurat.
-
-Proyek ini bertujuan untuk membangun Spam Email Machine Learning Pipeline menggunakan framework TensorFlow Extended (TFX). Pipeline ini akan mengotomatiskan seluruh proses pengolahan data, pelatihan model, validasi, hingga deployment model klasifikasi spam berbasis Neural Network.
-
-## **Dataset**
-
-Proyek ini menggunakan SMS Spam Collection Dataset, yang berisi kumpulan pesan SMS dengan label spam atau ham (bukan spam). Dataset ini akan melalui berbagai tahapan pemrosesan agar dapat digunakan untuk membangun model klasifikasi berbasis machine learning.
-
-## **Tujuan Proyek**
-
-- Mengembangkan pipeline machine learning yang dapat mengklasifikasikan pesan spam dan ham secara otomatis.
-- Memanfaatkan TensorFlow Extended (TFX) untuk membuat pipeline yang modular, reproducible, dan scalable.
-- Menggunakan teknik Natural Language Processing (NLP) untuk mengolah teks sebelum diklasifikasikan oleh model
-- Menganalisis performa model menggunakan berbagai metrik evaluasi seperti AUC, Binary Accuracy, False Positive, dan False Negative.
-
-## **Arsitektur Pipeline**
-
-Pipeline ini terdiri dari beberapa tahap utama:
-
-1. Data Ingestion: Mengimpor dataset ke dalam pipeline.
-
-2. Data Validation:
-
-   - Menghasilkan statistik ringkasan dari dataset.
-   - Membuat skema data untuk mendeteksi anomali.
-   - Mengidentifikasi inkonsistensi dalam data.
-
-3. Data Preprocessing:
-
-   - Membersihkan teks dan menormalkan format.
-   - Mengubah label menjadi format numerik.
-   - Melakukan tokenisasi dan vektorisasi teks.
-
-4. Model Development:
-
-- Mendesain dan melatih model klasifikasi berbasis Neural Network.
-
-- Menggunakan embedding dan teknik NLP untuk meningkatkan akurasi model.<>
-
-  5.Model Analysis & Validation:
-
-Mengevaluasi model dengan TFX Evaluator.
-
-Memastikan model memiliki performa yang stabil sebelum deployment.
-
-Model Deployment:
-
-Menggunakan TFX Pusher untuk mendistribusikan model ke lingkungan produksi.
-
-Memastikan model dapat digunakan untuk inferensi secara real-time.
-
-Metode Pengolahan Data
-
-Konversi huruf kecil menggunakan tf.strings.lower untuk konsistensi.
-
-Penghapusan tanda baca menggunakan metode lower_and_strip_punctuation dari TextVectorization.
-
-Transformasi label ke format numerik (ham = 0, spam = 1) menggunakan tf.cast.
-
-Arsitektur Model
-
-Model yang digunakan memiliki beberapa lapisan utama:
-
-TextVectorization: Mengubah teks menjadi token numerik.
-
-Embedding Layer: Mengonversi token menjadi representasi vektor.
-
-GlobalAveragePooling1D: Mereduksi dimensi vektor embedding.
-
-Dense Layer dengan ReLU: Menangkap pola kompleks dari teks.
-
-Output Layer dengan Sigmoid: Menghasilkan probabilitas klasifikasi spam atau ham.
-
-Model dikompilasi menggunakan optimizer Adam dan dievaluasi dengan binary accuracy.
-
-Metrik Evaluasi
-
-Area Under Curve (AUC): Menilai performa model dalam membedakan spam dan ham.
-
-Binary Accuracy: Mengukur seberapa banyak prediksi yang benar.
-
-False Positive & False Negative: Mengukur kesalahan prediksi spam dan ham.
-
-True Positive & True Negative: Menghitung jumlah prediksi yang benar untuk kedua kelas.
-
-Performa Model
-
-Model yang dikembangkan menunjukkan performa yang sangat baik dengan hasil berikut:
-
-AUC: 0.96755
-
-Binary Accuracy: 0.98225
-
-False Negatives: 16
-
-False Positives: 4
-
-True Negatives: 977
-
-True Positives: 130
-
-Loss: 0.10437
-
-Hasil ini menunjukkan bahwa model memiliki akurasi dan kemampuan prediksi yang tinggi dalam membedakan antara pesan spam dan non-spam. Dengan pipeline ini, pengguna dapat dengan mudah mengintegrasikan model ke dalam sistem produksi untuk mendeteksi spam secara otomatis.
+| Dataset                 | [Email Spam Dataset](https://www.kaggle.com/datasets/mfaisalqureshi/spam-email) |
+| Masalah                 | Masalah yang diangkat dalam proyek ini adalah klasifikasi email untuk menentukan apakah sebuah email merupakan spam atau tidak. Di dunia digital yang semakin berkembang, jumlah email yang masuk ke dalam kotak masuk (inbox) setiap hari meningkat secara signifikan. Banyak dari email tersebut adalah spam, yang dapat mengganggu dan menghambat produktivitas penggunanya. Masalahnya adalah bagaimana cara otomatis mendeteksi dan mengklasifikasikan email spam untuk mengurangi jumlah email yang tidak diinginkan, sehingga hanya email yang relevan yang masuk ke inbox pengguna.|
+| Solusi machine learning | Solusi machine learning yang diusulkan adalah membangun model klasifikasi yang dapat memisahkan email menjadi dua kategori: **`spam`** dan **`bukan spam`**. Model ini akan menggunakan teknik pembelajaran mendalam (deep learning) dengan memanfaatkan arsitektur **`neural network`**, seperti **`LSTM`** dan **`Dense layers**`, untuk mempelajari pola dan fitur-fitur penting dari teks email. Dataset yang digunakan akan diproses dan dimodifikasi menggunakan teknik transformasi fitur, dan model akan dilatih untuk mengenali pola-pola ini dengan tujuan untuk memprediksi apakah suatu email termasuk dalam kategori spam atau bukan. Dengan menggunakan machine learning, solusi ini menawarkan pendekatan otomatis yang lebih efisien dan akurat dibandingkan dengan metode manual untuk menangani email spam.|
+| Metode pengolahan       | Metode pengolahan data yang digunakan dalam proyek ini mencakup beberapa langkah penting untuk mempersiapkan dan memproses data sebelum digunakan dalam pelatihan model. **`Pertama`**, data email yang diterima akan diproses dengan **`teknik text vectorization`** , menggunakan TextVectorization dari TensorFlow. Teknik ini akan mengubah teks email menjadi representasi numerik berupa urutan angka yang mewakili kata-kata dalam email. Kemudian, **`TensorFlow Transform (TFT)`** digunakan untuk mentransformasikan fitur secara konsisten, yang memastikan bahwa data yang digunakan dalam pelatihan dan pengujian model memiliki kualitas dan struktur yang seragam. Setelah data diproses, model neural network dibangun dengan menggunakan arsitektur **`LSTM (Long Short-Term Memory)`** yang bertujuan untuk menangkap dependensi jangka panjang dalam teks email. Selain itu, Dense layers digunakan untuk menangkap hubungan non-linear yang ada dalam data. Model ini dilatih menggunakan **`binary crossentropy`** sebagai **`fungsi loss`** dan **`binary accuracy`** untuk evaluasi performa model. Selain itu, dilakukan juga **`hyperparameter tuning`** menggunakan **`Keras Tuner`** untuk mengoptimalkan kombinasi hyperparameter terbaik, seperti jumlah unit **`LSTM, dimensi embedding, learning rate, dan lainnya`**, dengan tujuan untuk meningkatkan performa model dalam klasifikasi spam. Dengan seluruh proses pengolahan data ini, diharapkan model dapat mengklasifikasikan email dengan akurat dan efisien.|
+| Arsitektur model        | Arsitektur model yang digunakan dalam proyek ini adalah model klasifikasi berbasis teks menggunakan **`Bidirectional LSTM`**. Model dimulai dengan Input Layer yang menerima input berupa teks email yang terdiri dari satu kata **`(shape=(None, 1))`** dengan tipe data string. Selanjutnya, teks tersebut diproses menggunakan **`Text Vectorization Layer`**, yang mengonversi teks mentah menjadi urutan token numerik dengan panjang maksimal 100 kata **`(sequence_length=100)`** dan membatasi jumlah kata unik yang digunakan menjadi 10.000 (vocab_size=10000). Hasil dari proses ini kemudian diteruskan ke Embedding Layer, yang mengonversi token-token tersebut menjadi representasi dense berdimensi 16 **`(embedding_dim=16)`**, dimana setiap kata diwakili oleh vektor berdimensi 16. Setelah itu, output dari embedding dimasukkan ke dalam **`Bidirectional LSTM Layer dengan 32 unit`**, yang memungkinkan model untuk memproses informasi dari kedua arah (dari kiri ke kanan dan sebaliknya) untuk menangkap konteks yang lebih baik. Output dari LSTM selanjutnya diteruskan ke dua buah Dense Layer berturut-turut. **`Layer pertama`** memiliki **`64 unit`** dengan fungsi **`aktivasi ReLU`**, dan **`layer kedua`** memiliki **`32 unit`** dengan fungsi aktivasi yang sama. Kedua layer dense ini berfungsi untuk mengekstrak fitur-fitur kompleks yang relevan untuk tugas klasifikasi. Untuk mengurangi kemungkinan **`overfitting`**, **`Dropout Layer`** diterapkan dengan **`rate 0,1`**, yang secara acak menonaktifkan 10% neuron selama pelatihan. Terakhir, model diakhiri dengan **`Output Layer`** berupa **`layer Dense`** dengan **`1 unit dan fungsi aktivasi sigmoid`**, yang menghasilkan probabilitas antara 0 dan 1 untuk menentukan apakah email tersebut termasuk kategori **`spam (nilai mendekati 1)`** atau **`tidak spam (nilai mendekati 0)`**. Model ini dilatih menggunakan **`binary cross-entropy`** sebagai **`fungsi loss`** dan **`Adam optimizer`** dengan **`learning rate=0.001`**.|
+| Metrik evaluasi         | Metrik evaluasi yang digunakan untuk mengevaluasi performa model ini adalah **`Binary Accuracy`**. Metrik ini digunakan karena model ini dirancang untuk masalah **`klasifikasi biner`**, yaitu untuk memprediksi apakah suatu email merupakan **`spam (label = 1)`** atau **`tidak spam (label = 0)`**. Binary Accuracy mengukur persentase prediksi yang benar dibandingkan dengan total jumlah prediksi. Dengan kata lain, ini menunjukkan berapa banyak email yang diprediksi dengan benar sebagai spam atau non-spam dibandingkan dengan seluruh dataset. Selain itu, pada proses pelatihan, model ini juga menggunakan Loss Function berupa Binary Crossentropy, yang menghitung seberapa besar perbedaan antara hasil prediksi probabilitas model dan label yang sebenarnya. Binary Crossentropy cocok untuk klasifikasi biner karena menghitung kerugian berdasarkan probabilitas prediksi yang diperoleh model dibandingkan dengan nilai sebenarnya (0 atau 1). Dalam konteks validasi dan pelatihan model, **`EarlyStopping`** diterapkan pada metrik **`val_binary_accuracy`** untuk menghentikan pelatihan lebih awal jika akurasi validasi tidak meningkat, sehingga mencegah model **`overfitting`** pada data pelatihan. Dengan mengandalkan **`binary accuracy`** dan **`binary crossentropy`**, model ini dapat dinilai seberapa baik dalam memprediksi dengan benar apakah suatu email adalah spam atau bukan, serta berfokus pada pengurangan kesalahan dalam pengklasifikasian spam.|
+| Performa model          | Model yang dibangun menunjukkan performa yang sangat baik dengan berbagai metrik evaluasi yang mendalam. Berikut adalah beberapa hasil performa model: **`Binary Accuracy`**: Akurasi model dalam mengklasifikasikan email **`spam`** atau **`tidak spam`** adalah **`97.3%`**, menunjukkan bahwa model mampu memprediksi dengan sangat tepat. **`False Negatives`**: Model memiliki **`11 false negatives`**, yang berarti ada 11 email yang sebenarnya adalah spam namun diklasifikasikan sebagai **`bukan spam`**. **`False Positives`**: Model memiliki **`18 false positives`**, yang berarti ada 18 email yang sebenarnya **`bukan spam`** namun diklasifikasikan sebagai **`spam`**. **`True Negatives`**: 930 email non-spam berhasil diklasifikasikan dengan benar sebagai **`bukan spam`**. **`True Positives`**: Model berhasil mengidentifikasi 122 email spam dengan benar. **`Loss`**: Model memiliki loss sebesar **`0.117`**, yang menunjukkan bahwa model memiliki kesalahan prediksi yang relatif rendah selama proses pelatihan.|
