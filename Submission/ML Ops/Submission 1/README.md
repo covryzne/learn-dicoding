@@ -34,9 +34,7 @@ def predict_spam(email_message):
 
     if response.status_code == 200:
         prediction = response.json()
-        spam_probability = prediction['predictions'][0][0]  # Ambil nilai dari list yang dikembalikan model
-
-        # Tentukan apakah spam atau tidak berdasarkan probabilitas
+        spam_probability = prediction['predictions'][0][0]
         if spam_probability > 0.5:
             return "Spam 🤡"
         else:
@@ -87,3 +85,9 @@ else:
     print("Pilihan tidak valid")
 
 ```
+
+## **Result**
+
+![](https://github.com/shendyeff/learn-dicoding/blob/db986f3655028a5e6ec2c5a00391beec4de94157/Submission/ML%20Ops/Submission%201/assets/result.gif)
+
+
