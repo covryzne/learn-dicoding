@@ -1,0 +1,202 @@
+feature {
+  name: "Churn"
+  type: INT
+  bool_domain {
+  }
+  presence {
+    min_fraction: 1.0
+    min_count: 1
+  }
+  shape {
+    dim {
+      size: 1
+    }
+  }
+}
+feature {
+  name: "InternetService"
+  type: BYTES
+  domain: "InternetService"
+  presence {
+    min_fraction: 1.0
+    min_count: 1
+  }
+  shape {
+    dim {
+      size: 1
+    }
+  }
+}
+feature {
+  name: "MonthlyCharges"
+  type: FLOAT
+  presence {
+    min_fraction: 1.0
+    min_count: 1
+  }
+  shape {
+    dim {
+      size: 1
+    }
+  }
+}
+feature {
+  name: "PaperlessBilling"
+  type: BYTES
+  domain: "PaperlessBilling"
+  presence {
+    min_fraction: 1.0
+    min_count: 1
+  }
+  shape {
+    dim {
+      size: 1
+    }
+  }
+}
+feature {
+  name: "Partner"
+  type: BYTES
+  domain: "Partner"
+  presence {
+    min_fraction: 1.0
+    min_count: 1
+  }
+  shape {
+    dim {
+      size: 1
+    }
+  }
+}
+feature {
+  name: "PhoneService"
+  type: BYTES
+  domain: "PhoneService"
+  presence {
+    min_fraction: 1.0
+    min_count: 1
+  }
+  shape {
+    dim {
+      size: 1
+    }
+  }
+}
+feature {
+  name: "SeniorCitizen"
+  type: BYTES
+  domain: "SeniorCitizen"
+  presence {
+    min_fraction: 1.0
+    min_count: 1
+  }
+  shape {
+    dim {
+      size: 1
+    }
+  }
+}
+feature {
+  name: "StreamingTV"
+  type: BYTES
+  domain: "StreamingTV"
+  presence {
+    min_fraction: 1.0
+    min_count: 1
+  }
+  shape {
+    dim {
+      size: 1
+    }
+  }
+}
+feature {
+  name: "TotalCharges"
+  type: FLOAT
+  presence {
+    min_fraction: 1.0
+    min_count: 1
+  }
+  shape {
+    dim {
+      size: 1
+    }
+  }
+}
+feature {
+  name: "customerID"
+  type: BYTES
+  presence {
+    min_fraction: 1.0
+    min_count: 1
+  }
+  shape {
+    dim {
+      size: 1
+    }
+  }
+}
+feature {
+  name: "gender"
+  type: BYTES
+  domain: "gender"
+  presence {
+    min_fraction: 1.0
+    min_count: 1
+  }
+  shape {
+    dim {
+      size: 1
+    }
+  }
+}
+feature {
+  name: "tenure"
+  type: INT
+  presence {
+    min_fraction: 1.0
+    min_count: 1
+  }
+  shape {
+    dim {
+      size: 1
+    }
+  }
+}
+string_domain {
+  name: "InternetService"
+  value: "DSL"
+  value: "Fiber optic"
+  value: "No"
+}
+string_domain {
+  name: "PaperlessBilling"
+  value: "No"
+  value: "Yes"
+}
+string_domain {
+  name: "Partner"
+  value: "No"
+  value: "Yes"
+}
+string_domain {
+  name: "PhoneService"
+  value: "No"
+  value: "Yes"
+}
+string_domain {
+  name: "SeniorCitizen"
+  value: "No"
+  value: "Yes"
+}
+string_domain {
+  name: "StreamingTV"
+  value: "No"
+  value: "No internet service"
+  value: "Yes"
+}
+string_domain {
+  name: "gender"
+  value: "Female"
+  value: "Male"
+}
