@@ -1,25 +1,16 @@
-# a443-cc-pipeline
-Ini adalah repositori untuk latihan pada kelas Machine Learning Operations (MLOps)
+# **Project Pengembangan dan Pengoperasian Sistem Machine Learning: Studi Kasus Prediksi Berita Palsu**
+`Nama: Shendi Teuku Maulana Efendi`<br>
+`Username Dicoding: shendyeff`
 
-- Install CLI heroku ([tautan](https://devcenter.heroku.com/articles/heroku-cli#install-the-heroku-cli))
-- Login ke heroku melalui CLI dengan perintah berikut.
-```
-heroku login
-```
-- Login ke heroku container registry ([dokumentasi](https://devcenter.heroku.com/articles/container-registry-and-runtime#logging-in-to-the-registry:~:text=%24-,heroku%20container%3Alogin,-or%20directly%20via))
-
-```
-heroku container:login
-```
-
-- Push container ke heroku container registry
-
-```
-heroku container:push web -a cc-prediction
-```
-
-- Release model serving
-
-```
-heroku container:release web -a cc-prediction
-```
+| | Deskripsi |
+| ----------- | ----------- |
+| Dataset | [Fake News Dataset](https://www.kaggle.com/datasets/hassanamin/textdb3) |
+| Masalah | Deskripsi masalah yang di angkat |
+| Solusi machine learning | Deskripsi solusi machine learning yang akan dibuat |
+| Metode pengolahan | Deskripsi metode pengolahan data yang digunakan |
+| Arsitektur model | Deskripsi arsitektur model yang diguanakan |
+| Metrik evaluasi | Deksripsi metrik yang digunakan untuk mengevaluasi performa model |
+| Performa model | Deksripsi performa model yang dibuat |
+| Opsi deployment | Deksripsi tentang opsi deployment |
+| Web app | Tautan web app yang digunakan untuk mengakses model serving. Contoh: [nama-model](https://model-resiko-kredit.herokuapp.com/v1/models/model-resiko-kredit/metadata)|
+| Monitoring | Deksripsi terkait hasil monitoring dari model serving |
