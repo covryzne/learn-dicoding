@@ -98,6 +98,49 @@ docker run -p 9090:9090 fake-news-monitoring
 - Local Prometheus UI → [http://localhost:9090/](http://localhost:9090/)
 - Status Prometheus → [http://localhost:9090/targets](http://localhost:9090/targets)
 
-### 3️⃣ Grafana Dashboard 
+
+## 📊 Cara Menggunakan Grafana untuk Monitoring
+Grafana digunakan untuk memvisualisasikan metrik model dari Prometheus.
+
+## 1️⃣ Jalankan Grafana (via Docker)
+```bash
+docker run -d -p 3000:3000 --name=grafana grafana/grafana
+Grafana akan berjalan di port 3000.
+```
+
+## 2️⃣ Akses Grafana
+Buka browser dan masuk ke:
+```bash
+http://localhost:3000
+```
+
+Default Login:
+`Username: admin`
+`Password: admin (nanti bisa diubah)`
+
+## 3️⃣ Tambah Data Source Prometheus
+1. Masuk ke Grafana UI (http://localhost:3000).
+2. Login dengan admin / admin.
+3. Klik Gear Icon (⚙️) di sidebar kiri → Data Sources.
+4. Klik Add data source.
+5. Pilih Prometheus.
+6. Di kolom URL, masukkan:
+```bash
+http://localhost:9090
+```
+
+7. Klik Save & Test.
+   
+## 4️⃣ Buat Dashboard Grafana
+1. Di sidebar kiri, klik + (Create) → Dashboard.
+2. Klik Add a new panel.
+3. Di bagian Query, pilih Prometheus sebagai data source.
+4. Masukkan query metrik, misalnya:
+```bash
+fake_news_model_prediction_count
+```
+5. Klik Apply dan Save Dashboard.
+
+## 5️⃣ Grafana Dashboard 
 ![Grafana - Dashboard - All_Panel](https://github.com/user-attachments/assets/1aaf61b5-08d0-4eaf-8115-0adf33ca8b68)
 
