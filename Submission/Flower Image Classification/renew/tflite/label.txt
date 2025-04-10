@@ -1,0 +1,14 @@
+astilbe
+bellflower
+black_eyed_susan
+calendula
+california_poppy
+carnation
+common_daisy
+coreopsis
+dandelion
+iris
+rose
+sunflower
+tulip
+water_lily
