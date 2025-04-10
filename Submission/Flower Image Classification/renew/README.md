@@ -2,9 +2,11 @@
 
 ## Project Overview
 
-This project is focused on building a Convolutional Neural Network (CNN) model to classify images of flowers into 14 distinct categories. The dataset used contains over 13,000 images of flowers, ensuring a diverse and challenging set for the model to learn from. This project aims to achieve high accuracy on both training and validation datasets, following a set of predefined criteria to ensure a robust and well-generalized model.
+This project focuses on developing a Convolutional Neural Network (CNN) model for classifying images of flowers into 14 different categories. Utilizing over 24,000 high-resolution images, the dataset provides a diverse and challenging foundation for training a robust model. The model is built using Transfer Learning with MobileNetV3Large as the base architecture, followed by custom convolutional and dense layers to enhance feature extraction and classification capabilities. To ensure effective learning and generalization, the dataset is split into 70% for training, 15% for validation, and 15% for testing. The model is trained with appropriate callbacks like EarlyStopping and ModelCheckpoint to avoid overfitting and preserve the best performance. Additionally, the trained model is exported into multiple formats — SavedModel, TensorFlow Lite (TFLite), and TensorFlow.js (TFJS) — making it suitable for deployment on various platforms such as web browsers, mobile devices, and cloud-based systems. The project aims to achieve high accuracy across all data splits while ensuring model compatibility and portability for real-world applications.
 
 ## Dataset
+`Link Dataset!` <br>
+[![Google Drive Dataset](https://img.shields.io/badge/Download%20Dataset-Google%20Drive-blue?style=for-the-badge&logo=google-drive)](https://drive.google.com/file/d/1m9UBYCzLElZ8x_-b_jysE7A9y-jSq04u/view?usp=drive_link)
 
 ### Dataset Description:
 
@@ -20,13 +22,21 @@ This project is focused on building a Convolutional Neural Network (CNN) model t
 | Rose                   | Sunflower              |
 | Tulip                  | Water Lily             |
 
-- The total number of images in the dataset exceeds 13,000, ensuring the dataset meets the required minimum of 10000 images.
-- The images are divided into a training set (80%) and a validation/test set (20%) to evaluate the model's performance effectively.
+- The total number of images in the dataset exceeds 24.000, ensuring the dataset meets the required minimum of 10000 images.
+- The images are divided into a training set (70%), validation set (15%), and test set (15%) to evaluate the model's performance effectively.
 
 ### Dataset Splitting:
 
-- **Training Set:** 80% of the dataset is used for training the model.
-- **Validation Set:** 20% of the dataset is used for validating the model's performance.
+The dataset is divided into three subsets to ensure optimal training and evaluation of the model:
+
+- `Training Set (70%)`
+  Used to train the model by allowing it to learn patterns from each image class.
+
+- `Validation Set (15%)`
+  Used to evaluate the model's performance during training and help prevent overfitting.
+
+- `Test Set (15%)`
+  Used to assess the final performance of the model after training, ensuring it can generalize well to unseen data.
 
 ## Model Architecture
 
@@ -41,17 +51,9 @@ This project is focused on building a Convolutional Neural Network (CNN) model t
 - **Dropout Layer:** A dropout layer is added to prevent overfitting by randomly setting a fraction of input units to 0 at each update during training.
 - **Dense Layer:** The final dense layer with a softmax activation function outputs the probabilities of each class.
   
-Model: **Sequential**
-| Layer (type)                 | Output Shape   | Param #   |
-|------------------------------|----------------|-----------|
-| MobilenetV3large (Functional) | (None, 7, 7, 960) | 2,996,352 |
-| conv2d (Conv2D)              | (None, 7, 7, 64)  | 553,024   |
-| max_pooling2d (MaxPooling2D) | (None, 3, 3, 64)  | 0         |
-| conv2d_1 (Conv2D)            | (None, 3, 3, 128) | 73,856    |
-| max_pooling2d_1 (MaxPooling2D)| (None, 1, 1, 128) | 0         |
-| flatten (Flatten)            | (None, 128)      | 0         |
-| dropout (Dropout)            | (None, 128)      | 0         |
-| dense (Dense)                | (None, 14)       | 1,806     |
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/ce51c235-58d3-4018-98e6-ca77edeac64d" width="600">
+</p>
 
 ### Activation Functions:
 
@@ -85,25 +87,28 @@ Model: **Sequential**
 - During the training process, plots for accuracy and loss over epochs are generated to visualize the model's learning process.
 - These plots help in understanding how well the model is fitting the data and whether there are any signs of overfitting or underfitting.
 
-<img src="https://github.com/shendyeff/learn-dicoding/blob/c5763b49534610b28748a60f3c24519ad7c383cf/Submission/Assets/Flower%20Image%20Classification/loss%20acc.png" width="1000">
+<img src="https://github.com/user-attachments/assets/fce6a862-7a82-4077-9c72-e01c2ac7128b" width="1000"> <br>
 
-| Epoch | Loss    | Accuracy | Val Loss | Val Accuracy |
-|-------|---------|----------|----------|--------------|
-| 0     | 0.905522| 0.736210 | 0.277265 | 0.918622     |
-| 1     | 0.327626| 0.903977 | 0.165723 | 0.945748     |
-| 2     | 0.206954| 0.938061 | 0.128094 | 0.961877     |
-| 3     | 0.146846| 0.954279 | 0.105651 | 0.969941     |
-| 4     | 0.109960| 0.968298 | 0.158723 | 0.958578     |
-| 5     | 0.110463| 0.966648 | 0.123099 | 0.976173     |
-| 6     | 0.099199| 0.972329 | 0.125565 | 0.974707     |
-| 7     | 0.101633| 0.971413 | 0.092807 | 0.979106     |
-| 8     | 0.052077| 0.984790 | 0.109990 | 0.979472     |
-| 9     | 0.086612| 0.977369 | 0.128743 | 0.974340     |
-| 10    | 0.070326| 0.979751 | 0.113604 | 0.982405     |
-| 11    | 0.047733| 0.987539 | 0.127281 | 0.981305     |
-| 12    | 0.057384| 0.985890 | 0.150161 | 0.976173     |
+| Epoch | Accuracy | Loss   | Val Accuracy | Val Loss |
+|-------|----------|--------|--------------|----------|
+| 1     | 0.6352   | 1.3132 | 0.9267       | 0.2364   |
+| 2     | 0.8983   | 0.3423 | 0.9578       | 0.1328   |
+| 3     | 0.9225   | 0.2568 | 0.9642       | 0.1099   |
+| 4     | 0.9465   | 0.1880 | 0.9805       | 0.0711   |
+| 5     | 0.9601   | 0.1340 | 0.9768       | 0.0822   |
+| 6     | 0.9657   | 0.1098 | 0.9854       | 0.0598   |
+| 7     | 0.9722   | 0.0905 | 0.9799       | 0.0814   |
+| 8     | 0.9746   | 0.0808 | 0.9803       | 0.0793   |
+| 9     | 0.9746   | 0.0976 | 0.9719       | 0.1277   |
+| 10    | 0.9756   | 0.0916 | 0.9901       | 0.0432   |
+| 11    | 0.9806   | 0.0764 | 0.9873       | 0.0553   |
+| 12    | 0.9774   | 0.0903 | 0.9869       | 0.0587   |
+| 13    | 0.9846   | 0.0623 | 0.9854       | 0.0595   |
+| 14    | 0.9868   | 0.0486 | 0.9874       | 0.0670   |
+| 15    | 0.9866   | 0.0507 | 0.9908       | 0.0584   |
 
-<img src="https://github.com/shendyeff/learn-dicoding/blob/c5763b49534610b28748a60f3c24519ad7c383cf/Submission/Assets/Flower%20Image%20Classification/accuracy%20epoch.png">
+<br>
+<img src="https://github.com/user-attachments/assets/6335546f-914c-4717-9754-36773552f2df">
 
 ## Model Deployment
 
@@ -123,43 +128,42 @@ Model: **Sequential**
 ### Example Code:
 
 ```python
-import tensorflow as tf
-import numpy as np
-from tensorflow.keras.preprocessing import image
-
-# Load the TFLite model and allocate tensors.
-interpreter = tf.lite.Interpreter(model_path="/content/tflite/model.tflite")
+# Load the TFLite model using tf.lite.Interpreter
+interpreter = tf.lite.Interpreter(model_path='tflite/model.tflite')
 interpreter.allocate_tensors()
 
-# Get input and output tensors.
+# Get input and output details
 input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
 
-# Prepare the image
-img_path = '6105173_d0b6a55d9e_c.jpg'
+# Path gambar yang di-upload
+img_path = "/content/dataset_split/test/iris/164507281_f5c9796e11_c.jpg"  # Nama file yang di-upload
+
+# Load dan preprocess gambar yang di-upload
 img = image.load_img(img_path, target_size=(224, 224))
 img_array = image.img_to_array(img)
 img_array = np.expand_dims(img_array, axis=0)
-img_array = img_array.astype('float32')
+img_array = preprocess_input(img_array)
 
-# Set the tensor to the image
+# Set input tensor and invoke the interpreter
 interpreter.set_tensor(input_details[0]['index'], img_array)
-
-# Run inference
 interpreter.invoke()
 
-# Get the output
-output_data = interpreter.get_tensor(output_details[0]['index'])
-predicted_class = np.argmax(output_data, axis=1)
+# Get the output tensor
+predictions = interpreter.get_tensor(output_details[0]['index'])
 
-print(f'Predicted class: {class_names[predicted_class[0]]}')
+# Get predicted class
+predicted_class = np.argmax(predictions, axis=1)
 
-# Display the image and the prediction
+predicted_label = class_names[predicted_class[0]]
+
+# Display the image and prediction
 plt.imshow(img)
-plt.title(f'Predicted: {class_names[predicted_class[0]]}')
+plt.title(f'Predicted: {predicted_label}')
 plt.axis('off')
 plt.show()
 ```
-### Prediction
-<img src="https://github.com/shendyeff/learn-dicoding/blob/85f2947b2f1fff9393f58b07d681ea57d3e6db3b/Submission/Assets/Flower%20Image%20Classification/pred-rose.png" width="400">
+
+### Prediction Result
+<img src="https://github.com/user-attachments/assets/38d61f39-0eff-4039-8784-a89c8f114559" width="400">
 
