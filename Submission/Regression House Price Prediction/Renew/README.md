@@ -1,11 +1,16 @@
 # Laporan Proyek Machine Learning - Shendi Teuku Maulana Efendi
 
 ## Domain Proyek
-Dalam beberapa tahun terakhir, penerapan machine learning dalam berbagai industri telah meningkat secara signifikan, termasuk dalam industri real estate. Proyek prediksi harga properti menjadi salah satu fokus utama karena pentingnya estimasi harga yang akurat bagi pelaku pasar seperti pembeli, penjual, investor, hingga pengembang properti. Kondisi pasar yang sangat fluktuatif dan dipengaruhi oleh berbagai faktor internal serta eksternal membutuhkan pendekatan yang lebih canggih daripada metode konvensional, dan machine learning menawarkan solusi tersebut dengan kemampuannya mengolah data dalam jumlah besar dan memodelkan hubungan yang kompleks.
+Dalam beberapa tahun terakhir, industri real estate mengalami perkembangan pesat seiring dengan meningkatnya kebutuhan masyarakat akan hunian dan properti sebagai instrumen investasi. Salah satu tantangan utama dalam industri ini adalah menentukan harga properti yang akurat dan objektif. Penentuan harga yang kurang tepat dapat merugikan banyak pihak, baik pembeli, penjual, investor, maupun pengembang. Hal ini disebabkan oleh banyaknya faktor yang mempengaruhi harga properti, mulai dari karakteristik fisik rumah (seperti luas tanah dan bangunan, jumlah kamar) hingga faktor eksternal seperti lokasi, infrastruktur, dan kondisi ekonomi sekitar.
 
-Dalam konteks proyek ini, saya menggunakan beberapa algoritma machine learning seperti Ridge Regression, Lasso Regression, ElasticNet, dan Support Vector Regression (SVR) untuk melakukan prediksi harga rumah. Berbagai model ini digunakan karena mereka mampu menangani masalah overfitting dan multikolinearitas, yang sering muncul dalam data prediksi properti. Misalnya, Ridge Regression menambahkan regularisasi untuk mengurangi varians model, sedangkan Lasso dapat membantu dalam melakukan feature selection dengan mendorong beberapa koefisien fitur menuju nol.
+Pendekatan konvensional yang mengandalkan penilaian manual atau metode statistik sederhana sering kali tidak cukup efektif untuk menangkap hubungan kompleks antar variabel tersebut. Oleh karena itu, penerapan machine learning menjadi solusi yang potensial karena kemampuannya dalam menangani data dalam jumlah besar dan mengidentifikasi pola-pola non-linear dalam data.
 
-Dataset yang digunakan mengandung berbagai variabel atau fitur yang mencakup spesifikasi properti seperti luas tanah, jumlah kamar, lokasi, serta faktor eksternal seperti kondisi ekonomi dan infrastruktur sekitar. Pemanfaatan machine learning di sini memungkinkan untuk menangkap interaksi antara berbagai fitur ini dan menghasilkan prediksi yang lebih akurat dibandingkan metode regresi tradisional.
+Dalam proyek ini, beberapa algoritma machine learning seperti Ridge Regression, Lasso Regression, ElasticNet, dan Support Vector Regression (SVR) digunakan untuk membangun model prediksi harga properti. Model-model ini dipilih karena memiliki keunggulan dalam mengatasi masalah multikolinearitas serta mampu melakukan regularisasi, yang membantu mencegah overfitting dan meningkatkan generalisasi model.
+
+Salah satu studi yang mendukung pendekatan ini dilakukan oleh Preethi et al. (2025) dalam jurnal berjudul Optimizing Polynomial and Regularization Techniques for Enhanced Housing Price Prediction Accuracy. Dalam studi tersebut, algoritma Ridge Regression, Lasso, dan ElasticNet menunjukkan performa yang baik dalam meningkatkan akurasi prediksi harga rumah dengan mengoptimalkan teknik regularisasi dan polynomial regression pada dataset perumahan. Referensi ini memperkuat alasan penggunaan model-model tersebut dalam proyek ini.
+
+Referensi: <br>
+Preethi, Murthy, D. H. R., Hiremani, V., Devadas, R. M., & Sapna, R. (2025). Optimizing polynomial and regularization techniques for enhanced housing price prediction accuracy. SN Computer Science, 6(96). https://doi.org/10.1007/s42979-024-03578-7​
   
 ## Business Understanding
 ### Problem Statements
@@ -195,7 +200,7 @@ ax2.set_xticklabels(ax2.get_xticklabels(), rotation=45, horizontalalignment='rig
 ax2.set_title('Missing Values in Test Data')
 plt.show()
 ```
-<img src="https://github.com/shendyeff/learn-dicoding/blob/c0cbdbec0673f34b174f11d4b623e5b94d40d1d2/Submission/Regression%20House%20Proce%20Prediction/Assets/missingvalues.png" width="750">
+<img src="https://github.com/user-attachments/assets/7c821354-71b0-4e67-97d3-ee38939beaee" width="750">
 
 #### Numerical Predictor Variables dengan Target Variabel Target
 ```python
@@ -209,7 +214,7 @@ for i,ax in zip(train_num.columns,axs.flatten()):
     plt.ylabel('SalePrice',fontsize=12)
     ax.set_title('SalePrice'+' - '+str(i),fontweight='bold',size=20)
 ```
-<img src="https://github.com/shendyeff/learn-dicoding/blob/03ce3dd82770b5c2c106f00cf12fedd2cdf6b8b1/Submission/Regression%20House%20Proce%20Prediction/Assets/numerical%20predictor.png" width="750">
+<img src="https://github.com/user-attachments/assets/a6e0befe-246e-49d5-a093-a58ed0ec7852" width="750">
 
 #### Categorical Predictor Variables dengan Target Variabel Target
 ```python
@@ -221,13 +226,13 @@ f = pd.melt(train, id_vars=['SalePrice'], value_vars=sorted(train[categorical.co
 g = sns.FacetGrid(f, col="variable", col_wrap=3, sharex=False, sharey=False, height=5)
 g = g.map(facetgrid_boxplot, "value", "SalePrice")
 ```
-<img src="https://github.com/shendyeff/learn-dicoding/blob/7576517887dc3062ce8e3bed5ae7b5f80c4c31d3/Submission/Regression%20House%20Proce%20Prediction/Assets/categorikal%20predictor.png" width="750">
+<img src="https://github.com/user-attachments/assets/c93b1452-049e-4bd4-9fb7-956b45f6e47e" width="750">
 
 #### Distribution of Target variable (SalePrice)
 ```python
 train['SalePrice'] = np.log1p(train['SalePrice'])
 ```
-<img src="https://github.com/shendyeff/learn-dicoding/blob/7576517887dc3062ce8e3bed5ae7b5f80c4c31d3/Submission/Regression%20House%20Proce%20Prediction/Assets/after%20normal%20distributed.png" width="500">
+<img src="https://github.com/user-attachments/assets/0838c555-2f2e-4b81-ab26-fb4c17a0c023" width="500">
 
 #### Heatmap Correlation
 ```python
@@ -236,7 +241,7 @@ mask = np.zeros_like(train_num.corr(), dtype=bool)
 mask[np.triu_indices_from(mask)] = True
 sns.heatmap(train_num.corr(), cmap=sns.diverging_palette(20, 220, n=200), mask = mask, annot=True, center = 0)
 ```
-<img src="https://github.com/shendyeff/learn-dicoding/blob/7576517887dc3062ce8e3bed5ae7b5f80c4c31d3/Submission/Regression%20House%20Proce%20Prediction/Assets/heatmapcorr.png" width="">
+<img src="https://github.com/user-attachments/assets/022fc28d-738e-4c23-866b-14e9344326eb" width="">
 
 1. Terdapat korelasi sebesar 0,83 atau 83% antara `GarageYrBlt` dan `YearBuilt`.<br>
 2. Korelasi 83% antara `TotRmsAbvGrd` dan `GrLivArea`.<br>
@@ -471,8 +476,8 @@ Dalam proyek ini, dua metrik evaluasi utama yang digunakan adalah `Mean Squared 
 
 1. **Mean Squared Error (MSE)**  
    MSE menghitung rata-rata dari kuadrat perbedaan antara nilai sebenarnya yᵢ dan nilai prediksi ŷᵢ. Formula MSE adalah: <br>
-   
-![mse-formula](https://github.com/user-attachments/assets/320dda67-89ae-4b13-84af-b7f7b946d098)
+
+   ![mse](https://github.com/user-attachments/assets/74b6e141-84d3-4b6c-94e5-64a3a9d83f50)
 
    Di mana:
    - `n` adalah jumlah data,
@@ -484,7 +489,7 @@ Dalam proyek ini, dua metrik evaluasi utama yang digunakan adalah `Mean Squared 
 3. **Root Mean Squared Error (RMSE)**  
    RMSE adalah akar dari MSE, yang mengubah satuan kesalahan menjadi satuan yang sama dengan target variabel. Formula RMSE adalah: <br>
 
-![rmse-formula](https://github.com/user-attachments/assets/6438ec34-817f-4a19-aab9-82ba66d36649)
+   ![rmse](https://github.com/user-attachments/assets/61ac9fad-d45e-4c56-9e78-0fd1f521a1e7)
 
    `RMSE` lebih intuitif karena nilai error berada pada skala yang sama dengan nilai prediksi.
 
@@ -497,7 +502,7 @@ Dalam proyek ini, dua metrik evaluasi utama yang digunakan adalah `Mean Squared 
 Model `SVR` lebih unggul karena mampu menangani dataset yang memiliki non-linearitas, yang mungkin menjadi alasan mengapa model ini outperform model regresi linear seperti `Ridge` dan `Lasso`.
 
 ### Perbandingan Kinerja Model
-![perbandingan-kinerja-model](https://github.com/user-attachments/assets/3c8eeae8-56d7-4803-8e71-877550025202)
+![perbandingan-kinerja-model](https://github.com/user-attachments/assets/533e0ffe-165d-4962-84e2-dd8385a6b53e)
 
 ### Apakah Berhasil Mencapai Goals yang Diharapkan?
 Goals yang diharapkan dalam proyek ini adalah menghasilkan model dengan error yang rendah (berdasarkan MSE dan RMSE) dan model yang mampu melakukan generalisasi dengan baik ke data yang belum pernah dilihat sebelumnya. Hasil evaluasi menunjukkan bahwa:
