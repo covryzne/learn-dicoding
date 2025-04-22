@@ -9,7 +9,7 @@ Dalam proyek ini, beberapa algoritma machine learning seperti Ridge Regression, 
 
 Salah satu studi yang mendukung pendekatan ini dilakukan oleh Preethi et al. (2025) dalam jurnal berjudul Optimizing Polynomial and Regularization Techniques for Enhanced Housing Price Prediction Accuracy. Dalam studi tersebut, algoritma Ridge Regression, Lasso, dan ElasticNet menunjukkan performa yang baik dalam meningkatkan akurasi prediksi harga rumah dengan mengoptimalkan teknik regularisasi dan polynomial regression pada dataset perumahan. Referensi ini memperkuat alasan penggunaan model-model tersebut dalam proyek ini.
 
-Referensi: <br>
+Referensi:
 Preethi, Murthy, D. H. R., Hiremani, V., Devadas, R. M., & Sapna, R. (2025). Optimizing polynomial and regularization techniques for enhanced housing price prediction accuracy. SN Computer Science, 6(96). https://doi.org/10.1007/s42979-024-03578-7​
   
 ## Business Understanding
@@ -200,7 +200,8 @@ ax2.set_xticklabels(ax2.get_xticklabels(), rotation=45, horizontalalignment='rig
 ax2.set_title('Missing Values in Test Data')
 plt.show()
 ```
-<img src="https://github.com/user-attachments/assets/7c821354-71b0-4e67-97d3-ee38939beaee" width="750">
+
+![plot-train-test](https://github.com/user-attachments/assets/7c821354-71b0-4e67-97d3-ee38939beaee)
 
 #### Numerical Predictor Variables dengan Target Variabel Target
 ```python
@@ -214,7 +215,8 @@ for i,ax in zip(train_num.columns,axs.flatten()):
     plt.ylabel('SalePrice',fontsize=12)
     ax.set_title('SalePrice'+' - '+str(i),fontweight='bold',size=20)
 ```
-<img src="https://github.com/user-attachments/assets/a6e0befe-246e-49d5-a093-a58ed0ec7852" width="750">
+
+![numerical-predictor-variables-target-variables](https://github.com/user-attachments/assets/a6e0befe-246e-49d5-a093-a58ed0ec7852)
 
 #### Categorical Predictor Variables dengan Target Variabel Target
 ```python
@@ -226,13 +228,14 @@ f = pd.melt(train, id_vars=['SalePrice'], value_vars=sorted(train[categorical.co
 g = sns.FacetGrid(f, col="variable", col_wrap=3, sharex=False, sharey=False, height=5)
 g = g.map(facetgrid_boxplot, "value", "SalePrice")
 ```
-<img src="https://github.com/user-attachments/assets/c93b1452-049e-4bd4-9fb7-956b45f6e47e" width="750">
+
+![numerical-predictor-variables-target-variables](https://github.com/user-attachments/assets/c93b1452-049e-4bd4-9fb7-956b45f6e47e)
 
 #### Distribution of Target variable (SalePrice)
 ```python
 train['SalePrice'] = np.log1p(train['SalePrice'])
-```
-<img src="https://github.com/user-attachments/assets/0838c555-2f2e-4b81-ab26-fb4c17a0c023" width="500">
+
+![distribution-saleprice](https://github.com/user-attachments/assets/0838c555-2f2e-4b81-ab26-fb4c17a0c023)
 
 #### Heatmap Correlation
 ```python
@@ -241,7 +244,7 @@ mask = np.zeros_like(train_num.corr(), dtype=bool)
 mask[np.triu_indices_from(mask)] = True
 sns.heatmap(train_num.corr(), cmap=sns.diverging_palette(20, 220, n=200), mask = mask, annot=True, center = 0)
 ```
-<img src="https://github.com/user-attachments/assets/022fc28d-738e-4c23-866b-14e9344326eb" width="">
+![heatmap](https://github.com/user-attachments/assets/022fc28d-738e-4c23-866b-14e9344326eb)
 
 1. Terdapat korelasi sebesar 0,83 atau 83% antara `GarageYrBlt` dan `YearBuilt`.<br>
 2. Korelasi 83% antara `TotRmsAbvGrd` dan `GrLivArea`.<br>
