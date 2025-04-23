@@ -118,7 +118,9 @@ Dataset ini mengandung beberapa nilai yang hilang pada kolom seperti `director`,
    plt.xticks(rotation = 45)
    plt.show()
    ```
-   <img src="https://github.com/user-attachments/assets/4324c2ba-c5d6-41c2-b33b-72a4b56f96de" width="700" height="500"> <br>
+   ![distribution-rating-konten](https://github.com/user-attachments/assets/d651c531-d5c8-418b-9c68-09b86a76b707)
+
+    
 
    Menunjukkan distribusi rating konten di Netflix. Saya ingin melihat kategori rating mana yang paling banyak. Menunjukkan distribusi konten berdasarkan rating. Terlihat bahwa kategori rating seperti `TV-MA` dan `TV-14` memiliki jumlah konten paling banyak, menunjukkan bahwa Netflix memiliki banyak konten untuk audiens dewasa dan remaja.
 
@@ -134,11 +136,11 @@ Dataset ini mengandung beberapa nilai yang hilang pada kolom seperti `director`,
     plt.xticks(rotation=45) 
     plt.show()
     ```
-   <img src="https://github.com/user-attachments/assets/4b0d0ab4-6007-4f1a-b6de-ec604b1cf25a" width="700" height="500"> <br>
-   
+   ![content-trend-yearly](https://github.com/user-attachments/assets/f2ae59b5-6b7c-4289-b917-23ebd2b814be)
+
    Mengekstrak informasi bulan dan tahun dari kolom `date_added` untuk melihat tren penambahan konten baru di Netflix selama bertahun-tahun. Menunjukkan jumlah konten yang ditambahkan ke Netflix setiap tahun, dibedakan berdasarkan tipe konten. Terlihat bahwa tahun 2019 memiliki jumlah konten yang ditambahkan paling banyak, mencerminkan pertumbuhan produksi konten orisinal Netflix.
 
-4. Negara Teratas dalam Produksi Konten
+3. Negara Teratas dalam Produksi Konten
    ```python
    top_countries = df['country'].value_counts().head(10) 
    plt.figure(figsize=(12, 8)) 
@@ -148,11 +150,11 @@ Dataset ini mengandung beberapa nilai yang hilang pada kolom seperti `director`,
    plt.ylabel('Country') 
    plt.show()
    ```
-   <img src="https://github.com/user-attachments/assets/61321b6e-9904-4dcf-8e46-95c816c5c925" width="700" height="500"> <br>
+  ![top-country-content-production](https://github.com/user-attachments/assets/dac9467a-2d37-40ca-9841-c607d59be203)
 
    Negara-negara teratas yang memproduksi konten Netflix untuk melihat distribusi asal produksi. Menampilkan 10 negara teratas yang memproduksi konten di Netflix. Amerika Serikat terlihat mendominasi dalam jumlah produksi konten, diikuti oleh negara-negara lain seperti India dan Inggris.
    
-6. Top Genre di Netflix
+4. Top Genre di Netflix
    ```python
    genres = df['listed_in'].str.split(', ', expand=True).stack().value_counts()
    plt.figure(figsize=(12, 8))
@@ -162,11 +164,11 @@ Dataset ini mengandung beberapa nilai yang hilang pada kolom seperti `director`,
    plt.ylabel('Genre')
    plt.show()
    ```
-   <img src="https://github.com/user-attachments/assets/8b397434-bc77-4b32-95e6-44efdf2296ec" width="700" height="500"> <br>
+   ![top-genre-netflix](https://github.com/user-attachments/assets/62f5ea37-51be-4f9d-a2d8-a622b6b8831f)
 
    Menunjukkan 10 genre teratas yang paling sering muncul di Netflix. Genre seperti `International Movies`, `Drama`, dan `Comedy` mendominasi platform ini, memberikan wawasan tentang preferensi audiens.
 
-8. Distribusi Durasi Film
+5. Distribusi Durasi Film
    ```python
    movies = df[df['type'] == 'Movie']
    movies['duration'] = pd.to_numeric(movies['duration'].str.replace(' min', ''), errors='coerce')
@@ -177,11 +179,11 @@ Dataset ini mengandung beberapa nilai yang hilang pada kolom seperti `director`,
    plt.ylabel('Frequency')
    plt.show()
    ```
-   <img src="https://github.com/user-attachments/assets/17054d56-c4fa-4552-b653-1386530f47e9" width="700" height="500"> <br>
+   ![distribution-time](https://github.com/user-attachments/assets/fb6236ab-8680-4c09-8b3e-15afca564397)
 
    Memperlihatkan distribusi durasi film di Netflix. Sebagian besar film memiliki durasi antara 80-120 menit, mencerminkan durasi standar untuk film di platform ini.
    
-10. Tahun Rilis Terbanyak
+6. Tahun Rilis Terbanyak
    ```python
    import pandas as pd
    plt.figure(figsize=(10, 6))
@@ -191,11 +193,11 @@ Dataset ini mengandung beberapa nilai yang hilang pada kolom seperti `director`,
    plt.ylabel('Count')
    plt.show()
    ```
-   <img src="https://github.com/user-attachments/assets/8f454875-aea2-4ca6-87a2-7b308fc8e5da" width="700" height="500"> <br>
-   
+   ![top-year-release](https://github.com/user-attachments/assets/476b16bd-694a-43ee-bb9f-04f786f70229)
+
    Menampilkan 10 tahun dengan jumlah rilis konten terbanyak di Netflix. Tahun 2018 dan 2017 adalah tahun-tahun dengan rilis terbanyak, mencerminkan puncak produksi konten di platform.
    
-11. Tren Konten yang Dirilis pada Netflix Tiap Tahun
+7. Tren Konten yang Dirilis pada Netflix Tiap Tahun
    ```python
    plt.figure(figsize=(10, 6))
    sns.countplot(data=df, x='release_year', order=df['release_year'].value_counts().index[:10])
@@ -205,11 +207,11 @@ Dataset ini mengandung beberapa nilai yang hilang pada kolom seperti `director`,
    plt.xticks(rotation=45)
    plt.show()
    ```
-   <img src="https://github.com/user-attachments/assets/3287f62b-08ca-42fa-b721-d43b040a1d14" width="700" height="500"> <br>
+   ![most-common-release-years-for-content](https://github.com/user-attachments/assets/b38b4cc5-3c85-4b49-8857-4e1dcde2b518)
    
    menunjukkan tahun-tahun dengan jumlah konten terbanyak yang dirilis di Netflix, membantu memahami tren produksi konten berdasarkan tahun rilis.
 
-11. Distribusi Rating Berdasarkan Tipe Konten
+8. Distribusi Rating Berdasarkan Tipe Konten
    ```python
    plt.figure(figsize=(10, 6))
    sns.countplot(data=df, x='rating', hue='type', order=df['rating'].value_counts().index)
@@ -219,8 +221,8 @@ Dataset ini mengandung beberapa nilai yang hilang pada kolom seperti `director`,
    plt.xticks(rotation=45)
    plt.show()
    ```
-   <img src="https://github.com/user-attachments/assets/de6b3947-363a-4ef4-9d38-fa9279eaaa2b" width="700" height="500"> <br>
-   
+   ![distribution-of-content-ratings](https://github.com/user-attachments/assets/ec2e68b6-6319-4a65-ad26-70ba9bfceffe)
+
    menunjukkan distribusi rating konten di Netflix, dibedakan berdasarkan tipe (Movie/TV Show). Terlihat bahwa film cenderung memiliki variasi rating yang lebih luas dibandingkan acara TV.
 
 ### Insight EDA
@@ -519,7 +521,7 @@ history = model.fit(
 )
 ```
 
-<img src="https://github.com/user-attachments/assets/a934dd8d-ed2f-4a0e-a089-592a4d1d18aa" width="700" height="500"> <br>
+![train-model-ncf](https://github.com/user-attachments/assets/721cd5c1-f14d-413f-a83e-4ea17be072af)
 
 ### Sistem Rekomendasi Menggunakan Collaborative Filltering
 ```python
@@ -715,9 +717,7 @@ Kombinasi atau hybrid system antara keduanya dapat dipertimbangkan untuk mempero
 
    Formula Precision:
 
-   $$
-   \text{Precision} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Positives (FP)}}
-   $$
+     ![precision](https://github.com/user-attachments/assets/9ad15f92-5274-41d2-8df4-beed2972fe4a)
 
    Penjelasan: Precision yang tinggi berarti sistem jarang memberikan rekomendasi yang tidak relevan.
 
@@ -726,9 +726,8 @@ Kombinasi atau hybrid system antara keduanya dapat dipertimbangkan untuk mempero
 
    Formula Recall:
 
-   $$
-   \text{Recall} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Negatives (FN)}}
-   $$
+     ![recall](https://github.com/user-attachments/assets/01c1981e-03c3-4405-bb1d-b977c19786ea)
+
 
    Penjelasan: Recall yang tinggi berarti sistem mampu menangkap semua item relevan dalam rekomendasinya.
 
@@ -737,9 +736,8 @@ Kombinasi atau hybrid system antara keduanya dapat dipertimbangkan untuk mempero
 
    Formula F1-Score:
 
-   $$
-   \text{F1-Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
-   $$
+    ![f1-score](https://github.com/user-attachments/assets/2a632664-8a80-4746-9c67-326e4f893680)
+
 
    Penjelasan: F1-Score memberikan gambaran tentang keseimbangan antara precision dan recall. Nilai F1-Score yang tinggi menunjukkan bahwa sistem mampu memberikan hasil yang relevan secara konsisten.
 
@@ -781,16 +779,15 @@ plt.ylabel('RMSE')
 plt.tight_layout()
 plt.show()
 ```
-<img src="https://github.com/user-attachments/assets/8c17b2b0-051c-4418-aa0e-a36cafdffa60" width="700" height="500"> <br>
+
+![mse-rmse](https://github.com/user-attachments/assets/26a90212-ba19-470c-be19-d55fbdf97b40)
 
 1. Root Mean Squared Error (RMSE)
 RMSE adalah salah satu metrik yang umum digunakan dalam sistem rekomendasi untuk mengukur seberapa akurat prediksi model terhadap data asli. RMSE memberikan gambaran mengenai seberapa besar kesalahan model dalam memprediksi rating, di mana semakin rendah nilai RMSE, semakin baik performa model dalam memprediksi rating yang tepat. <br>
 
 Formula RMSE: <br>
 
-$$
-\text{RMSE} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2}
-$$
+![rmse](https://github.com/user-attachments/assets/0efd9075-8b48-4a5d-bf81-174b9c934f9d)
 
 Di mana:
 - $y_i$ adalah rating asli (ground truth),
@@ -804,9 +801,7 @@ MSE adalah metrik yang menghitung rata-rata dari kuadrat selisih antara rating a
 
 Formula MSE: <br>
 
-$$
-\text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
-$$
+![mse](https://github.com/user-attachments/assets/89734eab-c1d2-4ae3-8bc3-17fdb0fda634)
 
 Di mana:
 - $y_i$ adalah rating asli (ground truth),
@@ -845,3 +840,8 @@ Sistem rekomendasi yang dikembangkan, baik dengan pendekatan `Content-Based Filt
    Pendekatan ini lebih baik dalam merekomendasikan konten yang bervariasi berdasarkan pola interaksi dari berbagai pengguna.
    * Memberikan rekomendasi yang lebih beragam dengan mempertimbangkan preferensi pengguna lain yang memiliki kesamaan pola.
    * Model ini membutuhkan data interaksi pengguna yang lebih banyak untuk memberikan hasil yang optimal.
+
+# Referensi 
+1. Zhang, H.-R., Min, F., He, X., & Xu, Y.-Y. (2015). A hybrid recommender system based on user-recommender interaction. Mathematical Problems in Engineering, 2015, Article ID 145636, 11 pages. https://doi.org/10.1155/2015/145636
+2. Farnadi, G., Srinivasan, S., Kouki, P., Thompson, S. K., & Getoor, L. (2018). A fairness-aware hybrid recommender system (arXiv:1809.09030). arXiv. https://arxiv.org/abs/1809.09030
+3. Çano, E., & Morisio, M. (2019). Hybrid recommender systems: A systematic literature review (arXiv:1901.03888). arXiv. https://arxiv.org/abs/1901.03888
