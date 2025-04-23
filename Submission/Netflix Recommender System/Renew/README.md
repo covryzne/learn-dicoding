@@ -736,8 +736,7 @@ Kombinasi atau hybrid system antara keduanya dapat dipertimbangkan untuk mempero
 
    Formula F1-Score:
 
-    ![f1-score](https://github.com/user-attachments/assets/2a632664-8a80-4746-9c67-326e4f893680)
-
+   ![f1](https://github.com/user-attachments/assets/30309140-4c06-4e85-b620-acd28a6c607e)
 
    Penjelasan: F1-Score memberikan gambaran tentang keseimbangan antara precision dan recall. Nilai F1-Score yang tinggi menunjukkan bahwa sistem mampu memberikan hasil yang relevan secara konsisten.
 
