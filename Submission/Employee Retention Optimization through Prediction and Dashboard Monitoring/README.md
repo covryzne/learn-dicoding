@@ -89,14 +89,10 @@ Link dataset bisa diakses di dibawah ini: <br> <br>
 - Menunjukkan faktor-faktor penting seperti departemen, usia, penghasilan, lama bekerja, dan tingkat kepuasan kerja yang berhubungan dengan attrition.
 - Menyediakan insight untuk pengambilan keputusan strategis oleh manajer HR.
 
-### Komponen Dashboard:
-1. Overall Attrition Rate — Persentase karyawan yang keluar dari perusahaan.
-2. Attrition by Department — Departemen dengan tingkat attrition tertinggi.
-3. Attrition by Age Group — Distribusi attrition berdasarkan kelompok usia.
-4. Attrition by Monthly Income — Korelasi antara pendapatan dan kemungkinan keluar.
-5. Attrition by Job Role — Job role dengan potensi attrition tinggi.
-6. Years at Company vs Attrition — Analisis seberapa besar pengaruh durasi kerja terhadap attrition.
-7. Top Predictors of Attrition — Fitur penting dari model machine learning.
+### Visualize Dashboard:
+
+![Screenshot (367)](https://github.com/user-attachments/assets/e7f7789a-e224-4810-a9a4-2dd4a388a62b)
+![Screenshot (368)](https://github.com/user-attachments/assets/1d56bbf5-5716-4721-aa85-41d063ccd9ee)
 
 ## **Conclusion**
 Proyek ini berhasil melakukan analisis menyeluruh terhadap faktor-faktor penyebab tingginya attrition rate di perusahaan Jaya Jaya Maju. Melalui proses EDA dan modeling, ditemukan bahwa faktor usia, loyalitas terhadap manajer, pengalaman kerja, serta kesejahteraan finansial sangat mempengaruhi keputusan karyawan untuk bertahan atau keluar.
