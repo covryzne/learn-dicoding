@@ -44,45 +44,6 @@ Link dataset bisa diakses di dibawah ini: <br> <br>
    python predict.py
    ```
 
-#### 4. Cara Setup Metabase
-
-   - Jalankan Metabase menggunakan Docker:
-   ```
-   docker run -d -p 3000:3000 --name metabase metabase/metabase
-   ```
-   
-   - Akses Metabase di browser:
-   ```
-   http://localhost:3000
-   ```
-
-   - Login Metabase
-   ```
-   Email: root@mail.com
-   Password: root123
-   ```
-
-   - Connect Metabase ke Supabase
-   Masukkan URL Database
-   ```
-   postgresql://postgres.bvnuasnbwmaxzgboenvl:[YOURPASSWORDDB]@URLTransactionPooler
-   ```
-
-   - Upload Data ke Supabase
-   Gunakan kode berikut untuk mengupload data ke Supabase:
-   ```python
-   from sqlalchemy import create_engine
-   # URL Database Supabase
-   URL = "postgresql://postgres.bvnuasnbwmaxzgboenvl:[YOURPASSWORDDB]@URLTransactionPooler"
-
-   # Create Engine
-   engine = create_engine(URL)
-
-   # Upload DataFrame ke Supabase (jangan lupa ubah 'df' sesuai nama DataFrame kamu)
-   df.to_sql('employee_data_supabase', engine, index=False, if_exists='replace')
-  ```
-
-
 ## Business Dashboard
 ### Tujuan Dashboard:
 - Memberikan visualisasi menyeluruh terkait attrition rate di perusahaan.
