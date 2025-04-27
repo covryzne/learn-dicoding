@@ -90,6 +90,8 @@ Link dataset bisa diakses di dibawah ini: <br> <br>
 - Menyediakan insight untuk pengambilan keputusan strategis oleh manajer HR.
 
 ### Visualize Dashboard:
+Dashboard bisa diakses pada link dibawah: <br><br>
+[![Built with Looker Studio](https://img.shields.io/badge/Built%20with-Looker%20Studio-4285F4?style=for-the-badge&logo=googleanalytics&logoColor=white)](https://lookerstudio.google.com/reporting/ddad8308-d445-4228-9208-ce9471113627)
 
 ![Screenshot (367)](https://github.com/user-attachments/assets/e7f7789a-e224-4810-a9a4-2dd4a388a62b)
 ![Screenshot (368)](https://github.com/user-attachments/assets/1d56bbf5-5716-4721-aa85-41d063ccd9ee)
