@@ -105,7 +105,28 @@ File penting:
 Model machine learning yang dibangun dengan algoritma RandomForest berhasil mengidentifikasi mahasiswa yang berpotensi mengalami dropout dengan akurasi dan interpretabilitas yang baik. Dashboard bisnis juga memberikan wawasan yang sangat berguna untuk pengambilan keputusan berbasis data.
 
 ## Rekomendasi Action Items
-1. Intervensi Dini: Terapkan sistem notifikasi berbasis skor risiko dropout untuk mahasiswa yang diprediksi berisiko tinggi.
-2. Monitoring Berkala: Gunakan dashboard untuk evaluasi rutin terhadap tren dropout dan efektivitas intervensi.
-3. Peningkatan Dukungan Akademik: Fokuskan dukungan pada faktor-faktor utama seperti keterlambatan pembayaran, usia masuk, dan hasil evaluasi akademik.
-4. Pengembangan Modul Retensi: Buat modul pembelajaran atau dukungan emosional khusus bagi mahasiswa dengan skor prediksi tinggi.
+Berdasarkan data dan temuan dari dashboard Jaya Jaya Institut Student Dropout Monitoring, berikut adalah beberapa langkah strategis yang direkomendasikan untuk menurunkan angka dropout dan meningkatkan retensi mahasiswa:
+
+1. Perkuat Program Beasiswa dan Bantuan Finansial
+   - Tingkatkan jumlah dan cakupan beasiswa untuk mahasiswa dari keluarga kurang mampu.
+   - Prioritaskan mahasiswa dengan risiko tinggi dropout berdasarkan data historis, terutama yang tidak menerima beasiswa dan berasal dari keluarga dengan orang tua tidak bekerja.
+
+2. Intervensi Akademik Dini
+   - Lakukan pemantauan ketat terhadap performa akademik di semester 1 dan 2.
+   - Mahasiswa dengan nilai masuk rendah dan rata-rata nilai semester rendah perlu segera mendapat bimbingan belajar, mentoring, atau program remedial.
+
+3. Penilaian dan Penyaringan Lebih Ketat di Tahap Penerimaan
+   - Evaluasi kembali standar nilai masuk dan kualifikasi sebelumnya, karena korelasinya cukup kuat dengan status kelulusan.
+   - Gunakan sistem skor risiko dropout pada saat seleksi untuk mengantisipasi potensi masalah.
+
+4. Keterlibatan Orang Tua dan Latar Belakang Sosial
+   - Libatkan orang tua dalam proses edukasi sejak awal, terutama pada mahasiswa dengan latar belakang keluarga yang kurang stabil secara ekonomi.
+   - Sediakan konseling sosial dan psikologis bagi mahasiswa yang menunjukkan tanda-tanda tekanan sosial.
+
+5. Optimalisasi Pembayaran Biaya Kuliah
+   - Buat sistem pembayaran cicilan yang fleksibel dan transparan untuk membantu mahasiswa dalam hal finansial.
+   - Sediakan dukungan keuangan darurat untuk mahasiswa yang mengalami krisis ekonomi mendadak.
+
+6. Peningkatan Engagement dan Monitoring Mahasiswa Aktif
+   - Gunakan sistem pelaporan mingguan atau bulanan berbasis platform digital untuk memantau keterlibatan akademik dan sosial mahasiswa aktif.
+   - Implementasikan early warning system berbasis data dari dashboard ini untuk mengidentifikasi dan mengintervensi mahasiswa berisiko sebelum terlambat.
