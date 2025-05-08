@@ -80,10 +80,14 @@ Dashboard interaktif dibuat menggunakan Looker Studio untuk membantu manajemen m
 Dashboard bisa diakses pada link dibawah: <br><br>
 [![Built with Looker Studio](https://img.shields.io/badge/Built%20with-Looker%20Studio-4285F4?style=for-the-badge&logo=googleanalytics&logoColor=white)](https://lookerstudio.google.com/reporting/d3df41d2-81cc-49a6-b147-211f7f8ff911)
 
+![Screenshot (453)](https://github.com/user-attachments/assets/6230cb24-ced8-4f00-a439-2c6a2ebd182e)
+![Screenshot (454)](https://github.com/user-attachments/assets/f34ecabe-33e1-4973-b8e1-e24afdb5552e)
+
+
 ## Menjalankan Sistem Machine Learning
 Prototype sistem prediksi dropout dikembangkan menggunakan Streamlit, yang memungkinkan pengguna memasukkan data mahasiswa dan mendapatkan prediksi secara real-time.
 
-🔗 Coba Prototype Streamlit (atau link hosting jika sudah dipublikasikan)
+🔗 Coba Prototype Streamlit (https://dropout-prediction-submission-2-penerapan-ds.streamlit.app/)
 
 Langkah menjalankan di lokal:
 ```
