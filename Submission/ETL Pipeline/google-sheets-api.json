@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "etl-pipeline-submission-470712",
+  "private_key_id": "aed4eb5de38df533f4740124a42b187f57241412",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC33FgRrxt7ewv8\neds2+TpgBcEJxUFa62t1n3pc/kDQABz3fcdRKkYm6jZlWBjxwQCsXvaUsG6ob3vw\nVEhIu/qkgOoqci+AhmSdvw9GspWfhwOuOEDuyVZwoJw/ZMcpnxsZUDkQWOtvvCnv\nj5/gfr7ODtKhKxm28YYQi1EaJgVuz5g+nm1cp+LgrXVQkc0189CbiR9Cn8eS3x69\nBJQPnZRI8Wvsgy6WbMDv1NQDBxEg3lMGXyhy7HX9DZUjd7oW3aB57ooBT/6I8OGT\ngDiiu4pEzwGpgQCFkwp0JlArzHQ/NjoItKRmpIlykTxRSuQrDJ8LV552bM0BMdeI\nOX9OJDzJAgMBAAECggEABd/9c+40mnrdcI87vxtSX1Jbv1pNWvCCFed3R1yr+UGB\nq3JaUbiANpreC1m37VSplvhvWGO1W345d33X8/QGv6YrZVkR9cFFmolJ/Yw0Df2I\nU3MydvbZw15Mc9WebBDskp/evOwcdMzuSZx9IzUll2u/lP0NtKvtyN5MxIFBw+9C\nCZD3Gncz7ONLGATTQvROV6/QaHU9NxTlWvl7JNRXMg5F7ay1Evcs89GhXFYd+xzm\n91KADBdTMibn6sLVLO0uthq8Tt8eKWfFlbJ9zkndeyoi6ueCRYSsWpmcwQCRFYJR\nrlaGCyGLlQPnDmlQGOZ6qqc0Jh/pWlBRwHZEz8IOYQKBgQDwmvxA/QGpbKgYkBDM\np+gk6UBbpSh8/W7zFc2kJVZl1nRAA+19qgW/miogPceJuDSTP4GsV+2gZ3DILfwu\n3RiqpOXo1sVOQchUjRh/b8rkBVNKDG0PUk/AwL4qVqDwREoYb3UjcaCQJYQ/JN3Y\ncijVZhZQTVkNLJnFVyRl1cwr4QKBgQDDn+eWuLL/TGq1BZVOg52kk5Dc4w1fuUnq\nPIdI33IiAYlp1Tj7fPWOEmfbbak7zTmvXkmFYpI+fYCNnVulK+GUaYoZfV98ThLO\ntLRXWiE5jTuuMhM7qRW8bTIKd0qGbl2hIO6m6T0JedsmPZozGv+urIeDsejjqsO8\nVxFt4NHt6QKBgQCTgzHs1jFSol9cz9a84qSdHLRse5GbL/X56wAtBwc1YIndRYsx\nZDAqDGaPZdEUSm9RZ7ok47O4iDLJSAg44yzgUkDyw9or5IDh9a9zUiLeMbWizIOA\nxUJINuNgKcR6CiQzXwI+PMfoGFhALmYk8bi/PNupWAKk5RdRud+C39VRgQKBgAlH\nu6/NwUgVMva1dhjMa50UFwozhz3kR1piVrShTQPJ+N/ZaqObkPaVbvHc6OtaWAM2\nwNwgCfoG8CNHtMJIK6Jjw1ZkOTRna8L8lZWTRAI77fncjEcHRW2z7GzMre9kqvJq\n4oduhyO88SWGRJtqC3kY3DDmLrsmLbTwmHYS9UKJAoGBAOeJ6sjiik8N+FKSTGez\n/xwYaFoQ4YEe3RGnUo542Z5vt2C5q7V8Tm/vb8syPeKo011JiVN0qqg0KzYLKJIM\n9FhlD/kpxMe8o6DSxL4CgMGUgxuSQFpdYV4GtAzZUn7V9IZA4RUsUOCs96Dnp42F\nWmu3VsNMyHOQ7TIGo4K1ocR5\n-----END PRIVATE KEY-----\n",
+  "client_email": "etl-pipeline-submission@etl-pipeline-submission-470712.iam.gserviceaccount.com",
+  "client_id": "106227712951226333075",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/etl-pipeline-submission%40etl-pipeline-submission-470712.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
